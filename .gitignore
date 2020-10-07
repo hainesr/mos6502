@@ -1,0 +1,12 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/tmp/
+
+.ruby-version
+.ruby-gemset
+
+Gemfile.lock
