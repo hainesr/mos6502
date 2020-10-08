@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
-  s.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+  s.files         = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject do |f|
       f.match(%r{^(test|spec|features)/})
     end

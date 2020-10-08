@@ -13,9 +13,3 @@
 Layout/SpaceAroundOperators:
   Exclude:
     - 'mos6502.gemspec'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/ExpandPathArguments:
-  Exclude:
-    - 'mos6502.gemspec'
