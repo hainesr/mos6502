@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors       = ['Robert Haines']
   s.email         = ['robert.haines@manchester.ac.uk']
 
-  s.summary       = 'A 6502 in ruby.'
+  s.summary       = 'A 6502 microprocessor in ruby.'
   #s.description   = %q{TODO: Write a longer description or delete this line.}
   #s.homepage      = "TODO: Put your gem's website or public repo URL here."
 
