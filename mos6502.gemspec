@@ -13,8 +13,7 @@ Gem::Specification.new do |s|
   s.email         = ['robert.haines@manchester.ac.uk']
 
   s.summary       = 'A 6502 microprocessor in ruby.'
-  #s.description   = %q{TODO: Write a longer description or delete this line.}
-  #s.homepage      = "TODO: Put your gem's website or public repo URL here."
+  s.homepage      = 'https://github.com/hainesr/mos6502'
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
 
