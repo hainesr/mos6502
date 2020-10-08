@@ -33,12 +33,3 @@ Layout/SpaceAroundOperators:
 Style/ExpandPathArguments:
   Exclude:
     - 'mos6502.gemspec'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
-# SupportedStyles: single_quotes, double_quotes
-Style/StringLiterals:
-  Exclude:
-    - 'bin/console'
-    - 'lib/mos6502/version.rb'
