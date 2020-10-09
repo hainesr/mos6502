@@ -13,3 +13,7 @@
 Layout/SpaceAroundOperators:
   Exclude:
     - 'mos6502.gemspec'
+
+# Sort this out later :-s.
+Style/Documentation:
+  Enabled: false
