@@ -5,8 +5,3 @@
 # Licensed under the BSD License. See LICENCE for details.
 
 require_relative 'mos6502/version'
-
-module Mos6502
-  class Error < StandardError; end
-  # Your code goes here...
-end
