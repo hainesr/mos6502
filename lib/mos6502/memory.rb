@@ -21,5 +21,9 @@ module Mos6502
     def get_word(address)
       get(address) + (get(address + 1) << 8)
     end
+
+    def dump(start, length)
+      (start...(start + length)).reduce([]) { |acc, i| acc << get(i) }
+    end
   end
 end
