@@ -23,8 +23,8 @@ class Mos6502::MemoryTest < Minitest::Test
     assert_equal(0x00, @memory.get(0xff))
   end
 
-  def test_write_word_just_writes_byte
-    @memory.set(0x00, 0x1010)
+  def test_write_word_just_writes_lo_byte
+    @memory.set(0x00, 0x2010)
     assert_equal(0x10, @memory.get(0x00))
     assert_equal(0x00, @memory.get(0x01))
   end
