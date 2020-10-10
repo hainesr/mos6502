@@ -4,6 +4,32 @@ AllCops:
   TargetRubyVersion: 2.4
   NewCops: enable
 
+# Ignore ABC failures in the tests.
+Metrics/AbcSize:
+  Exclude:
+    - 'test/**/*.rb'
+
+# Ignore block length failures in the tests.
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*.rb'
+
+# Ignore class length failures in the tests.
+Metrics/ClassLength:
+  Exclude:
+    - 'test/**/*.rb'
+
+# Ignore method length failures in the tests.
+Metrics/MethodLength:
+  Exclude:
+    - 'test/**/*.rb'
+
+# Ignore module length failures in the tests.
+Metrics/ModuleLength:
+  Exclude:
+    - 'test/**/*.rb'
+
+# Allow compact child definitions in the tests for brevity.
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
