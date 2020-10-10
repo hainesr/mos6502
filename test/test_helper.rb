@@ -7,6 +7,4 @@
 require 'coveralls'
 Coveralls.wear!
 
-require 'mos6502'
-
 require 'minitest/autorun'
