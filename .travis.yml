@@ -15,5 +15,11 @@ rvm:
 
 matrix:
   fast_finish: true
+  include:
+    - name: Rubocop
+      rvm: 2.4
+      script:
+      - bundle info rubocop
+      - bundle exec rubocop
   allow_failures:
     - rvm: ruby-head
