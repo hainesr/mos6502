@@ -15,7 +15,7 @@ module Mos6502
       load!(code)
     end
 
-    def load!(code)
+    def load!(code = nil)
       reset!
       return if code.nil?
 

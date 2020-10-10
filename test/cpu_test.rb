@@ -56,4 +56,28 @@ class Mos6502::CpuTest < Minitest::Test
     assert_equal(0x600, cpu.pc)
     assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
   end
+
+  def test_cpu_load_nil_resets
+    cpu = Mos6502::Cpu.new(code: @code_string)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
+
+    cpu.load!
+    assert_equal([0x00] * 7, cpu.dump_memory(cpu.pc, 7))
+  end
+
+  def test_cpu_load_empty_string_resets
+    cpu = Mos6502::Cpu.new(code: @code_string)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
+
+    cpu.load!('')
+    assert_equal([0x00] * 7, cpu.dump_memory(cpu.pc, 7))
+  end
+
+  def test_cpu_load_empty_array_resets
+    cpu = Mos6502::Cpu.new(code: @code_string)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
+
+    cpu.load!([])
+    assert_equal([0x00] * 7, cpu.dump_memory(cpu.pc, 7))
+  end
 end
