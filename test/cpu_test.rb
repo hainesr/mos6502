@@ -34,22 +34,26 @@ class Mos6502::CpuTest < Minitest::Test
   def test_init_cpu_code_bytes
     cpu = Mos6502::Cpu.new(code: @code_bytes)
     assert_equal(0x600, cpu.pc)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
   end
 
   def test_init_cpu_code_string_pc
     cpu = Mos6502::Cpu.new(code: @code_string, initial_pc: 0x400)
     assert_equal(0x400, cpu.pc)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
   end
 
-  def test_load_bytes
-    cpu = Mos6502::Cpu.new
+  def test_load_bytes_after_pc_init
+    cpu = Mos6502::Cpu.new(initial_pc: 0x500)
     cpu.load!(@code_bytes)
-    assert_equal(0x600, cpu.pc)
+    assert_equal(0x500, cpu.pc)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
   end
 
   def test_load_string
     cpu = Mos6502::Cpu.new
     cpu.load!(@code_string)
     assert_equal(0x600, cpu.pc)
+    assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
   end
 end

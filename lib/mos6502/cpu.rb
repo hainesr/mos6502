@@ -27,6 +27,10 @@ module Mos6502
       end
     end
 
+    def dump_memory(start, length)
+      @memory.dump(start, length)
+    end
+
     private
 
     def reset!
