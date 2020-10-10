@@ -10,10 +10,24 @@ module Mos6502
   class Cpu
     attr_reader :a, :pc, :sp, :x, :y
 
-    def initialize(initial_pc = 0x600)
+    def initialize(initial_pc: 0x600, code: nil)
       @initial_pc = initial_pc
-      reset!
+      load!(code)
     end
+
+    def load!(code)
+      reset!
+      return if code.nil?
+
+      loc = @pc
+      code = code.bytes if code.respond_to?(:bytes)
+      code.each do |b|
+        @memory.set(loc, b)
+        loc += 1
+      end
+    end
+
+    private
 
     def reset!
       @memory = Memory.new
