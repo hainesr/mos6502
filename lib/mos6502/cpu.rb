@@ -4,6 +4,7 @@
 #
 # Licensed under the BSD License. See LICENCE for details.
 
+require_relative 'cpu_flags'
 require_relative 'memory'
 
 module Mos6502
@@ -12,6 +13,7 @@ module Mos6502
 
     def initialize(initial_pc: 0x600, code: nil)
       @initial_pc = initial_pc
+      @status = CpuFlags.new
       load!(code)
     end
 
@@ -40,6 +42,7 @@ module Mos6502
       @a = 0x00
       @x = 0x00
       @y = 0x00
+      @status.reset!
     end
   end
 end
