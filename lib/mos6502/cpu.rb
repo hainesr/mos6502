@@ -33,6 +33,13 @@ module Mos6502
       @memory.dump(start, length)
     end
 
+    def inspect
+      format(
+        'a: 0x%02x, x: 0x%02x, y: 0x%02x, sp: 0x%02x, ' \
+        'pc: 0x%04x, status: 0b%08b', @a, @x, @y, @sp, @pc, @status.encode
+      )
+    end
+
     private
 
     def reset!
