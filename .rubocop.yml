@@ -4,8 +4,9 @@ AllCops:
   TargetRubyVersion: 2.4
   NewCops: enable
 
-# Ignore ABC failures in the tests.
+# Set a slightly bigger default, and ignore ABC failures in the tests.
 Metrics/AbcSize:
+  Max: 25
   Exclude:
     - 'test/**/*.rb'
 

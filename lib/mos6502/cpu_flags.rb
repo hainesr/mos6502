@@ -66,6 +66,23 @@ module Mos6502
       @negative
     end
 
+    def encode
+      [
+        @negative, @overflow, true, @break, @decimal_mode,
+        @interupt_disable, @zero, @carry
+      ].reduce(0) { |acc, flag| (acc << 1) + get_flag(flag) }
+    end
+
+    def decode(bin)
+      self.carry = bin & 1
+      self.zero = (bin >> 1) & 1
+      self.interupt_disable = (bin >> 2) & 1
+      self.decimal_mode = (bin >> 3) & 1
+      self.break = (bin >> 4) & 1
+      self.overflow = (bin >> 6) & 1
+      self.negative = (bin >> 7) & 1
+    end
+
     def reset!
       @carry = false
       @zero = false
@@ -80,6 +97,10 @@ module Mos6502
 
     def set_flag(flag)            # rubocop:disable Naming/AccessorMethodName
       flag == 0 ? false : !!flag  # rubocop:disable Style/NumericPredicate
+    end
+
+    def get_flag(flag)
+      flag ? 1 : 0
     end
   end
 end

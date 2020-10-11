@@ -73,4 +73,59 @@ class Mos6502::CpuFlagsTest < Minitest::Test
     refute(@flags.overflow?)
     refute(@flags.zero?)
   end
+
+  def test_encode
+    assert_equal(0b00100000, @flags.encode)
+
+    @flags.carry = true
+    assert_equal(0b00100001, @flags.encode)
+
+    @flags.negative = true
+    assert_equal(0b10100001, @flags.encode)
+
+    @flags.interupt_disable = true
+    assert_equal(0b10100101, @flags.encode)
+
+    @flags.break = true
+    assert_equal(0b10110101, @flags.encode)
+
+    @flags.overflow = true
+    assert_equal(0b11110101, @flags.encode)
+
+    @flags.zero = true
+    assert_equal(0b11110111, @flags.encode)
+
+    @flags.decimal_mode = true
+    assert_equal(0b11111111, @flags.encode)
+  end
+
+  def test_decode
+    @flags.decode(0b11111111)
+    assert(@flags.break?)
+    assert(@flags.carry?)
+    assert(@flags.decimal_mode?)
+    assert(@flags.interupt_disable?)
+    assert(@flags.negative?)
+    assert(@flags.overflow?)
+    assert(@flags.zero?)
+
+    @flags.decode(0)
+    refute(@flags.break?)
+    refute(@flags.carry?)
+    refute(@flags.decimal_mode?)
+    refute(@flags.interupt_disable?)
+    refute(@flags.negative?)
+    refute(@flags.overflow?)
+    refute(@flags.zero?)
+
+    @flags.decode(0b11111111)
+    @flags.decode(0b00100000)
+    refute(@flags.break?)
+    refute(@flags.carry?)
+    refute(@flags.decimal_mode?)
+    refute(@flags.interupt_disable?)
+    refute(@flags.negative?)
+    refute(@flags.overflow?)
+    refute(@flags.zero?)
+  end
 end
