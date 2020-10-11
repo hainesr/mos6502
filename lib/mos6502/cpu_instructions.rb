@@ -25,6 +25,12 @@ module Mos6502
         0xaa => lambda {
           @x = @a & 0xff
           set_nz_flags(@x)
+        },
+
+        # INX
+        0xe8 => lambda {
+          @x = (@x + 1) & 0xff
+          set_nz_flags(@x)
         }
       }
     end
