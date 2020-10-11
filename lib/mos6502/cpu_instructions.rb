@@ -19,6 +19,12 @@ module Mos6502
         0xa9 => lambda {
           @a = next_byte
           set_nz_flags(@a)
+        },
+
+        # TAX
+        0xaa => lambda {
+          @x = @a & 0xff
+          set_nz_flags(@x)
         }
       }
     end
