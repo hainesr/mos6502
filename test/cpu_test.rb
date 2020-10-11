@@ -18,7 +18,7 @@ class Mos6502::CpuTest < Minitest::Test
     assert_equal(0x00, cpu.a)
     assert_equal(0x00, cpu.x)
     assert_equal(0x00, cpu.y)
-    assert_equal(0x01ff, cpu.sp)
+    assert_equal(0xff, cpu.sp)
     assert_equal(0x600, cpu.pc)
   end
 
@@ -27,7 +27,7 @@ class Mos6502::CpuTest < Minitest::Test
     assert_equal(0x00, cpu.a)
     assert_equal(0x00, cpu.x)
     assert_equal(0x00, cpu.y)
-    assert_equal(0x01ff, cpu.sp)
+    assert_equal(0xff, cpu.sp)
     assert_equal(0x500, cpu.pc)
   end
 

@@ -38,7 +38,7 @@ module Mos6502
     def reset!
       @memory = Memory.new
       @pc = @initial_pc
-      @sp = 0x01ff
+      @sp = 0xff
       @a = 0x00
       @x = 0x00
       @y = 0x00
