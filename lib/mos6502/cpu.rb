@@ -5,6 +5,7 @@
 # Licensed under the BSD License. See LICENCE for details.
 
 require_relative 'cpu_flags'
+require_relative 'cpu_instructions'
 require_relative 'memory'
 
 module Mos6502
@@ -15,6 +16,12 @@ module Mos6502
       @initial_pc = initial_pc
       @status = CpuFlags.new
       load!(code)
+      @instructions = instructions
+    end
+
+    def step
+      inst = next_byte
+      @instructions[inst].call
     end
 
     def load!(code = nil)
@@ -41,6 +48,18 @@ module Mos6502
     end
 
     private
+
+    def next_byte
+      pc = @pc
+      @pc += 1
+      @memory.get(pc)
+    end
+
+    def next_word
+      pc = @pc
+      @pc += 2
+      @memory.get_word(pc)
+    end
 
     def reset!
       @memory = Memory.new
