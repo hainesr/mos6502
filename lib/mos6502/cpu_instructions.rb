@@ -33,6 +33,12 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # INY
+        0xc8 => lambda {
+          @y = (@y + 1) & 0xff
+          set_nz_flags(@y)
+        },
+
         # INX
         0xe8 => lambda {
           @x = (@x + 1) & 0xff
