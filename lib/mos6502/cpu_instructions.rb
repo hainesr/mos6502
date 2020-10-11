@@ -15,6 +15,12 @@ module Mos6502
 
     def instructions
       {
+        # TAY
+        0xa8 => lambda {
+          @y = @a & 0xff
+          set_nz_flags(@y)
+        },
+
         # LDA (immediate)
         0xa9 => lambda {
           @a = next_byte

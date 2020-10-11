@@ -12,6 +12,16 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     @cpu = Mos6502::Cpu.new
   end
 
+  def test_0xa8
+    @cpu.load!([0xa9, 0x21, 0xa8])
+    assert_equal(0x00, @cpu.y)
+    @cpu.step
+    @cpu.step
+    assert_equal(0x21, @cpu.a)
+    assert_equal(0x21, @cpu.y)
+    assert_equal(0x603, @cpu.pc)
+  end
+
   def test_0xa9
     @cpu.load!([0xa9, 0xc0])
     assert_equal(0x00, @cpu.a)
