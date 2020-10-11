@@ -43,7 +43,10 @@ module Mos6502
         0xe8 => lambda {
           @x = (@x + 1) & 0xff
           set_nz_flags(@x)
-        }
+        },
+
+        # NOP
+        0xea => lambda {} # rubocop:disable Style/Lambda
       }
     end
   end
