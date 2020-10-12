@@ -21,6 +21,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # DEX
+        0xca => lambda {
+          @x = (@x - 1) & 0xff
+          set_nz_flags(@x)
+        },
+
         # LDY (immediate)
         0xa0 => lambda {
           @y = next_byte
