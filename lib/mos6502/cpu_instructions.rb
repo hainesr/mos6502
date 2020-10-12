@@ -15,10 +15,20 @@ module Mos6502
 
     def instructions
       {
+        # CLC
+        0x18 => lambda {
+          @status.carry = false
+        },
+
         # AND (immediate)
         0x29 => lambda {
           @a &= next_byte
           set_nz_flags(@a)
+        },
+
+        # SEC
+        0x38 => lambda {
+          @status.carry = true
         },
 
         # CLI

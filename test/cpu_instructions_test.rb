@@ -12,6 +12,17 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     @cpu = Mos6502::Cpu.new
   end
 
+  def test_0x18_0x38
+    @cpu.load!([0x18, 0x38, 0x18])
+    refute(@cpu.carry?)
+    @cpu.step
+    refute(@cpu.carry?)
+    @cpu.step
+    assert(@cpu.carry?)
+    @cpu.step
+    refute(@cpu.carry?)
+  end
+
   def test_0x29
     @cpu.load!([0xa9, 0x33, 0x29, 0x55])
     @cpu.step
