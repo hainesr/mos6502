@@ -21,6 +21,16 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # CLI
+        0x58 => lambda {
+          @status.interupt_disable = false
+        },
+
+        # SEI
+        0x78 => lambda {
+          @status.interupt_disable = true
+        },
+
         # DEY
         0x88 => lambda {
           @y = (@y - 1) & 0xff
