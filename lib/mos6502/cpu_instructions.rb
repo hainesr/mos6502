@@ -31,9 +31,20 @@ module Mos6502
           @status.carry = true
         },
 
+        # PHA
+        0x48 => lambda {
+          stack_push(@a)
+        },
+
         # CLI
         0x58 => lambda {
           @status.interupt_disable = false
+        },
+
+        # PLA
+        0x68 => lambda {
+          @a = stack_pop
+          set_nz_flags(@a)
         },
 
         # SEI

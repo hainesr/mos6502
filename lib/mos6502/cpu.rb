@@ -56,6 +56,16 @@ module Mos6502
 
     private
 
+    def stack_push(value)
+      @memory.set((@sp & 0xff) + 0x0100, value)
+      @sp -= 1
+    end
+
+    def stack_pop
+      @sp += 1
+      @memory.get(@sp + 0x0100)
+    end
+
     def next_byte
       pc = @pc
       @pc += 1
