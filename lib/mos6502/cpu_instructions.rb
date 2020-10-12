@@ -27,6 +27,12 @@ module Mos6502
           set_nz_flags(@y)
         },
 
+        # TSX
+        0xba => lambda {
+          @x = @sp & 0xff
+          set_nz_flags(@x)
+        },
+
         # DEX
         0xca => lambda {
           @x = (@x - 1) & 0xff

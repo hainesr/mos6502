@@ -28,6 +28,13 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0x603, @cpu.pc)
   end
 
+  def test_0xba
+    @cpu.load!([0xba])
+    @cpu.step
+    assert_equal(0xff, @cpu.x)
+    assert_equal(0x601, @cpu.pc)
+  end
+
   def test_0xca
     @cpu.load!([0xa2, 0x33, 0xca])
     @cpu.step
