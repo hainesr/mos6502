@@ -15,6 +15,11 @@ module Mos6502
 
     def instructions
       {
+        # PHP
+        0x08 => lambda {
+          stack_push(@status.encode)
+        },
+
         # CLC
         0x18 => lambda {
           @status.carry = false
