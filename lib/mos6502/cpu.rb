@@ -4,13 +4,20 @@
 #
 # Licensed under the BSD License. See LICENCE for details.
 
+require 'forwardable'
+
 require_relative 'cpu_flags'
 require_relative 'cpu_instructions'
 require_relative 'memory'
 
 module Mos6502
   class Cpu
+    extend Forwardable
+
     attr_reader :a, :pc, :sp, :x, :y
+
+    def_delegators :@status, :break?, :carry?, :decimal_mode?,
+                   :interupt_disable?, :negative?, :overflow?, :zero?
 
     def initialize(initial_pc: 0x600, code: nil)
       @initial_pc = initial_pc
