@@ -20,6 +20,11 @@ module Mos6502
           @status.carry = false
         },
 
+        # PLP
+        0x28 => lambda {
+          @status.decode(stack_pop)
+        },
+
         # AND (immediate)
         0x29 => lambda {
           @a &= next_byte

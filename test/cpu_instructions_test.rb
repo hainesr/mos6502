@@ -23,6 +23,23 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.carry?)
   end
 
+  def test_0x28
+    @cpu.load!([0xa9, 0x4d, 0x48, 0x28])
+    @cpu.step
+    @cpu.step
+    assert_equal(0xfe, @cpu.sp)
+    refute(@cpu.overflow?)
+    refute(@cpu.carry?)
+    refute(@cpu.decimal_mode?)
+    refute(@cpu.interupt_disable?)
+    @cpu.step
+    assert_equal(0xff, @cpu.sp)
+    assert(@cpu.overflow?)
+    assert(@cpu.carry?)
+    assert(@cpu.decimal_mode?)
+    assert(@cpu.interupt_disable?)
+  end
+
   def test_0x29
     @cpu.load!([0xa9, 0x33, 0x29, 0x55])
     @cpu.step
