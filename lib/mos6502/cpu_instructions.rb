@@ -92,6 +92,11 @@ module Mos6502
           set_nz_flags(@y)
         },
 
+        # CLD
+        0xd8 => lambda {
+          @status.decimal_mode = false
+        },
+
         # INX
         0xe8 => lambda {
           @x = (@x + 1) & 0xff
@@ -99,7 +104,12 @@ module Mos6502
         },
 
         # NOP
-        0xea => lambda {} # rubocop:disable Style/Lambda
+        0xea => lambda {}, # rubocop:disable Style/Lambda
+
+        # SED
+        0xf8 => lambda {
+          @status.decimal_mode = true
+        }
       }
     end
   end

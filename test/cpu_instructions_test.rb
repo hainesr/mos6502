@@ -120,6 +120,17 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0x603, @cpu.pc)
   end
 
+  def test_0xd8_0xf8
+    @cpu.load!([0xd8, 0xf8, 0xd8])
+    refute(@cpu.decimal_mode?)
+    @cpu.step
+    refute(@cpu.decimal_mode?)
+    @cpu.step
+    assert(@cpu.decimal_mode?)
+    @cpu.step
+    refute(@cpu.decimal_mode?)
+  end
+
   def test_0xe8
     @cpu.load!([0xa2, 0x33, 0xe8])
     @cpu.step
