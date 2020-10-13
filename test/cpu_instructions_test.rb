@@ -160,6 +160,16 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0x603, @cpu.pc)
   end
 
+  def test_0xb8
+    @cpu.load!([0xa9, 0x40, 0x48, 0x28, 0xb8])
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert(@cpu.overflow?)
+    @cpu.step
+    refute(@cpu.overflow?)
+  end
+
   def test_0xba
     @cpu.load!([0xba])
     @cpu.step

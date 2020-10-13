@@ -127,6 +127,11 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # CLV
+        0xb8 => lambda {
+          @status.overflow = false
+        },
+
         # INY
         0xc8 => lambda {
           @y = (@y + 1) & 0xff
