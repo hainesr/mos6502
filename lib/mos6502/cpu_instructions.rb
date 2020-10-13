@@ -85,18 +85,6 @@ module Mos6502
           @sp = @x & 0xff
         },
 
-        # TSX
-        0xba => lambda {
-          @x = @sp & 0xff
-          set_nz_flags(@x)
-        },
-
-        # DEX
-        0xca => lambda {
-          @x = (@x - 1) & 0xff
-          set_nz_flags(@x)
-        },
-
         # LDY (immediate)
         0xa0 => lambda {
           @y = next_byte
@@ -132,10 +120,22 @@ module Mos6502
           @status.overflow = false
         },
 
+        # TSX
+        0xba => lambda {
+          @x = @sp & 0xff
+          set_nz_flags(@x)
+        },
+
         # INY
         0xc8 => lambda {
           @y = (@y + 1) & 0xff
           set_nz_flags(@y)
+        },
+
+        # DEX
+        0xca => lambda {
+          @x = (@x - 1) & 0xff
+          set_nz_flags(@x)
         },
 
         # CLD
