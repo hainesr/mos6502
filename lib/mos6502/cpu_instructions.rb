@@ -13,6 +13,10 @@ module Mos6502
       @status.negative = value & 0x80
     end
 
+    def set_carry(value, bit)
+      @status.carry = (value >> bit) & 1
+    end
+
     def instructions
       {
         # BRK
@@ -42,6 +46,15 @@ module Mos6502
         # AND (immediate)
         0x29 => lambda {
           @a &= next_byte
+          set_nz_flags(@a)
+        },
+
+        # ROL (accumulator)
+        0x2a => lambda {
+          carry = @status.carry? ? 1 : 0
+          set_carry(@a, 7)
+          @a = (@a << 1) & 0xff
+          @a |= carry
           set_nz_flags(@a)
         },
 
