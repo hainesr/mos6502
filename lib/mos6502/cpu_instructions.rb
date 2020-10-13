@@ -15,6 +15,15 @@ module Mos6502
 
     def instructions
       {
+        # BRK
+        0x00 => lambda {
+          stack_push((@pc >> 8) & 0xff)
+          stack_push(@pc & 0xff)
+          stack_push(@status.encode)
+          @pc = @memory.get_word(0xfffe)
+          @status.break = true
+        },
+
         # PHP
         0x08 => lambda {
           stack_push(@status.encode)
