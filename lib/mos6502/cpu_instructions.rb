@@ -79,6 +79,15 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # ROR (accumulator)
+        0x6a => lambda {
+          carry = @status.carry?
+          set_carry(@a, 0)
+          @a = @a >> 1
+          @a |= 0x80 if carry
+          set_nz_flags(@a)
+        },
+
         # SEI
         0x78 => lambda {
           @status.interupt_disable = true
