@@ -75,6 +75,13 @@ module Mos6502
           stack_push(@a)
         },
 
+        # LSR (accumulator)
+        0x4a => lambda {
+          set_carry(@a, 0)
+          @a = @a >> 1
+          set_nz_flags(@a)
+        },
+
         # CLI
         0x58 => lambda {
           @status.interupt_disable = false
