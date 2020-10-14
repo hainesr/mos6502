@@ -33,6 +33,13 @@ module Mos6502
           stack_push(@status.encode)
         },
 
+        # ASL (accumulator)
+        0x0a => lambda {
+          set_carry(@a, 7)
+          @a = (@a << 1) & 0xff
+          set_nz_flags(@a)
+        },
+
         # CLC
         0x18 => lambda {
           @status.carry = false
