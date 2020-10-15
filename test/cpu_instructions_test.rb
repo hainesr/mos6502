@@ -303,6 +303,47 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0x603, @cpu.pc)
   end
 
+  def test_0xe9_2scomp
+    @cpu.load!(
+      [0xa9, 0x01, 0xe9, 0x01, 0xe9, 0xff, 0xe9, 0x01, 0xe9, 0x80, 0xe9, 0x7d]
+    )
+    @cpu.step
+    @cpu.step
+    assert_equal(0xff, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0xff, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0xfd, @cpu.a)
+    assert(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x7d, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x00, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.overflow?)
+    assert(@cpu.zero?)
+  end
+
   def test_0xea
     @cpu.load!([0xea, 0xea, 0xea])
     @cpu.step

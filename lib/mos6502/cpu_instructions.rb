@@ -33,6 +33,14 @@ module Mos6502
       set_nz_flags(@a)
     end
 
+    def sbc(value)
+      if @status.decimal_mode?
+        # TODO
+      else
+        adc(value ^ 0xff)
+      end
+    end
+
     def instructions
       {
         # BRK
@@ -213,6 +221,11 @@ module Mos6502
         0xe8 => lambda {
           @x = (@x + 1) & 0xff
           set_nz_flags(@x)
+        },
+
+        # SBC (immediate)
+        0xe9 => lambda {
+          sbc(next_byte)
         },
 
         # NOP
