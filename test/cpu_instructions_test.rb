@@ -122,6 +122,47 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.interupt_disable?)
   end
 
+  def test_0x69_2scomp
+    @cpu.load!(
+      [0xa9, 0x03, 0x69, 0x02, 0x69, 0xfa, 0x69, 0x01, 0x69, 0x80, 0x69, 0x80]
+    )
+    @cpu.step
+    @cpu.step
+    assert_equal(0x05, @cpu.a)
+    refute(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0xff, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x00, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.overflow?)
+    assert(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x81, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x01, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    assert(@cpu.overflow?)
+    refute(@cpu.zero?)
+  end
+
   def test_0x6a
     @cpu.load!([0xa9, 0x03, 0x38, 0x6a])
     @cpu.step

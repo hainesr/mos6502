@@ -17,6 +17,22 @@ module Mos6502
       @status.carry = (value >> bit) & 1
     end
 
+    def adc(value)
+      carry = @status.carry? ? 1 : 0
+
+      if @status.decimal_mode?
+        # TODO
+      else
+        result = @a + value + carry
+        @status.overflow =
+          (((@a & 0x7f) + (value & 0x7f) + carry) >> 7) ^ (result >> 8)
+        @status.carry = result > 0xff
+      end
+
+      @a = result & 0xff
+      set_nz_flags(@a)
+    end
+
     def instructions
       {
         # BRK
@@ -91,6 +107,11 @@ module Mos6502
         0x68 => lambda {
           @a = stack_pop
           set_nz_flags(@a)
+        },
+
+        # ADC (immediate)
+        0x69 => lambda {
+          adc(next_byte)
         },
 
         # ROR (accumulator)
