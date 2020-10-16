@@ -21,7 +21,18 @@ module Mos6502
       carry = @status.carry? ? 1 : 0
 
       if @status.decimal_mode?
-        # TODO
+        result = (@a & 0x0f) + (value & 0x0f) + carry
+        result = 0x10 | ((result + 0x06) & 0x0f) if result >= 0x0a
+        result += (@a & 0xf0) + (value & 0xf0)
+
+        if result >= 0xa0
+          result += 0x60
+          @status.carry = true
+          @status.overflow = ((@a ^ value) & 0x80).zero? && (result >= 0x0180)
+        else
+          @status.carry = false
+          @status.overflow = !((@a ^ value) & 0x80).zero? && (result < 0x80)
+        end
       else
         result = @a + value + carry
         @status.overflow =

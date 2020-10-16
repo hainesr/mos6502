@@ -163,6 +163,41 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.zero?)
   end
 
+  def test_0x69_bcd
+    @cpu.load!(
+      [0xf8, 0xa9, 0x90, 0x69, 0x09, 0x69, 0x99, 0x69, 0x01, 0x69, 0x01]
+    )
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert_equal(0x99, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x98, @cpu.a)
+    assert(@cpu.carry?)
+    assert(@cpu.negative?)
+    assert(@cpu.overflow?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x00, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.overflow?)
+    assert(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x02, @cpu.a)
+    refute(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.overflow?)
+    refute(@cpu.zero?)
+  end
+
   def test_0x6a
     @cpu.load!([0xa9, 0x03, 0x38, 0x6a])
     @cpu.step
