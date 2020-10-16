@@ -352,6 +352,28 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.decimal_mode?)
   end
 
+  def test_0xe0
+    @cpu.load!([0xa2, 0x20, 0xe0, 0x10, 0xe0, 0x30, 0xe0, 0x20])
+    @cpu.step
+    @cpu.step
+    assert_equal(0x20, @cpu.x)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x20, @cpu.x)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x20, @cpu.x)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    assert(@cpu.zero?)
+  end
+
   def test_0xe8
     @cpu.load!([0xa2, 0x33, 0xe8])
     @cpu.step

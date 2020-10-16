@@ -259,6 +259,11 @@ module Mos6502
           @status.decimal_mode = false
         },
 
+        # CPX (immediate)
+        0xe0 => lambda {
+          compare(@x, next_byte)
+        },
+
         # INX
         0xe8 => lambda {
           @x = (@x + 1) & 0xff
