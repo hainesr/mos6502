@@ -36,6 +36,10 @@ Metrics/ModuleLength:
   Exclude:
     - 'test/**/*.rb'
 
+# Set a slightly higher default for this.
+Metrics/PerceivedComplexity:
+  Max: 10
+
 # Allow compact child definitions in the tests for brevity.
 Style/ClassAndModuleChildren:
   Exclude:
