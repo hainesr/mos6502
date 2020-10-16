@@ -311,6 +311,28 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0x603, @cpu.pc)
   end
 
+  def test_0xc9
+    @cpu.load!([0xa9, 0x20, 0xc9, 0x10, 0xc9, 0x30, 0xc9, 0x20])
+    @cpu.step
+    @cpu.step
+    assert_equal(0x20, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x20, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    assert_equal(0x20, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    assert(@cpu.zero?)
+  end
+
   def test_0xca
     @cpu.load!([0xa2, 0x33, 0xca])
     @cpu.step

@@ -17,6 +17,11 @@ module Mos6502
       @status.carry = (value >> bit) & 1
     end
 
+    def compare(register, value)
+      @status.carry = register >= value
+      set_nz_flags(register - value)
+    end
+
     def adc(value)
       carry = @status.carry? ? 1 : 0
 
@@ -236,6 +241,11 @@ module Mos6502
         0xc8 => lambda {
           @y = (@y + 1) & 0xff
           set_nz_flags(@y)
+        },
+
+        # CMP (immediate)
+        0xc9 => lambda {
+          compare(@a, next_byte)
         },
 
         # DEX
