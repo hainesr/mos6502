@@ -1,6 +1,8 @@
 # Ruby MOS 6502
 
-A ruby implementation of the 6502 microprocessor.
+A ruby implementation of the [MOS Technology 6502 microprocessor][wp-6502].
+
+![Image of a MOS Technology 6502 microprocessor (from Wikipedia)](https://upload.wikimedia.org/wikipedia/commons/4/49/MOS_6502AD_4585_top.jpg)
 
 ## Installation
 
@@ -42,3 +44,5 @@ Everyone interacting in the MOS 6502 project's codebases, issue trackers, chat r
 Copyright (c) 2020, Robert Haines.
 
 Released under the BSD Licence. See LICENCE for details.
+
+[wp-6502]: https://en.wikipedia.org/wiki/MOS_Technology_6502
