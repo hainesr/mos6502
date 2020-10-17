@@ -237,6 +237,11 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # CPY (immediate)
+        0xc0 => lambda {
+          compare(@y, next_byte)
+        },
+
         # INY
         0xc8 => lambda {
           @y = (@y + 1) & 0xff
