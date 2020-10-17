@@ -78,6 +78,10 @@ module Mos6502
       end
     end
 
+    def zero_page(register = 0)
+      (next_byte + register) & 0xff
+    end
+
     def instructions
       {
         # BRK
