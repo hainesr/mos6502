@@ -35,7 +35,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/haines
 
 ## Code of Conduct
 
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/hainesr/mos6502/blob/master/CODE_OF_CONDUCT.md).
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct][coc].
 
 Everyone interacting in the MOS 6502 project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
 
@@ -46,3 +46,4 @@ Copyright (c) 2020, Robert Haines.
 Released under the BSD Licence. See LICENCE for details.
 
 [wp-6502]: https://en.wikipedia.org/wiki/MOS_Technology_6502
+[coc]: https://github.com/hainesr/mos6502/blob/master/CODE_OF_CONDUCT.md
