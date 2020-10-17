@@ -6,8 +6,8 @@
 
 module Mos6502
   class Memory
-    def initialize
-      @memory = []
+    def initialize(image = nil)
+      load!(image)
     end
 
     def set(address, value)
@@ -20,6 +20,14 @@ module Mos6502
 
     def get_word(address)
       get(address) + (get(address + 1) << 8)
+    end
+
+    def load!(image, start = 0)
+      @memory = []
+      return if image.nil?
+
+      image = image.bytes if image.respond_to?(:bytes)
+      @memory[start, image.length] = image
     end
 
     def dump(start, length)
