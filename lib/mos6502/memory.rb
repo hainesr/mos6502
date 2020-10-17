@@ -15,7 +15,7 @@ module Mos6502
     end
 
     def get(address)
-      @memory.fetch(address, 0x00)
+      @memory[address] || 0x00
     end
 
     def get_word(address)

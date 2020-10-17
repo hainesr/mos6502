@@ -50,5 +50,6 @@ class Mos6502::MemoryTest < Minitest::Test
     assert_equal(bytes[1, 4], @memory.dump(0x601, 4))
     assert_equal(bytes[3, 4], @memory.dump(0x603, 4))
     assert_equal([0xc4, 0x00, 0x00, 0x00], @memory.dump(0x605, 4))
+    assert_equal([0x00, 0x00, 0x00, 0xa9], @memory.dump(0x5fd, 4))
   end
 end
