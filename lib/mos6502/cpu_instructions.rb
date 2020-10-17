@@ -194,6 +194,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # STA (zero page, X)
+        0x95 => lambda {
+          @memory.set(zero_page(@x), @a)
+        },
+
         # TYA
         0x98 => lambda {
           @a = @y & 0xff
