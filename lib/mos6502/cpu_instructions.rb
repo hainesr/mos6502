@@ -190,6 +190,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # STA (absolute)
+        0x8d => lambda {
+          @memory.set(absolute, @a)
+        },
+
         # STA (zero page, X)
         0x95 => lambda {
           @memory.set(zero_page(@x), @a)
