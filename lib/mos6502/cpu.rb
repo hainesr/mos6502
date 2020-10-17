@@ -85,6 +85,10 @@ module Mos6502
       (next_byte + register) & 0xff
     end
 
+    def absolute(register = 0)
+      (next_word + register)
+    end
+
     def reset!
       @memory = Memory.new
       @pc = @initial_pc
