@@ -206,6 +206,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # STA (absolute, Y)
+        0x99 => lambda {
+          @memory.set(absolute(@y), @a)
+        },
+
         # TXS
         0x9a => lambda {
           @sp = @x & 0xff
