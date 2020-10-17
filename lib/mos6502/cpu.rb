@@ -56,6 +56,7 @@ module Mos6502
 
     private
 
+    # Stack access.
     def stack_push(value)
       @memory.set((@sp & 0xff) + 0x0100, value)
       @sp -= 1
@@ -66,6 +67,7 @@ module Mos6502
       @memory.get(@sp + 0x0100)
     end
 
+    # Program access.
     def next_byte
       pc = @pc
       @pc += 1
@@ -76,6 +78,11 @@ module Mos6502
       pc = @pc
       @pc += 2
       @memory.get_word(pc)
+    end
+
+    # Memory access.
+    def zero_page(register = 0)
+      (next_byte + register) & 0xff
     end
 
     def reset!
