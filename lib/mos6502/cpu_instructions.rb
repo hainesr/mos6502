@@ -211,6 +211,11 @@ module Mos6502
           @sp = @x & 0xff
         },
 
+        # STA (absolute, X)
+        0x9d => lambda {
+          @memory.set(absolute(@x), @a)
+        },
+
         # LDY (immediate)
         0xa0 => lambda {
           @y = next_byte
