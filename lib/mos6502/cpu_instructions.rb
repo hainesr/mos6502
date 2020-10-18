@@ -8,6 +8,14 @@ module Mos6502
   class Cpu
     private
 
+    def branch(offset)
+      if offset > 0x7f
+        @pc - (0x100 - offset)
+      else
+        @pc + offset
+      end
+    end
+
     def compare(register, value)
       @status.carry = register >= value
       set_nz_flags(register - value)
