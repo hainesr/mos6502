@@ -24,9 +24,13 @@ Metrics/ClassLength:
     - 'lib/mos6502/cpu_instructions.rb'
     - 'test/**/*.rb'
 
-# Set a slightly higher default for CC.
+# Set a slightly higher default for this.
+# Also ignore the CPU instructions file, which looks complex to this sort
+# of tool, but isn't really.
 Metrics/CyclomaticComplexity:
   Max: 10
+  Exclude:
+    - 'lib/mos6502/cpu_instructions.rb'
 
 # Ignore method length failures in the tests.
 # Also ignore in the CPU instructions file, which is unavoidably big.
@@ -41,8 +45,12 @@ Metrics/ModuleLength:
     - 'test/**/*.rb'
 
 # Set a slightly higher default for this.
+# Also ignore the CPU instructions file, which looks complex to this sort
+# of tool, but isn't really.
 Metrics/PerceivedComplexity:
   Max: 10
+  Exclude:
+    - 'lib/mos6502/cpu_instructions.rb'
 
 # Allow compact child definitions in the tests for brevity.
 Style/ClassAndModuleChildren:
