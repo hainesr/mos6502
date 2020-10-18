@@ -216,6 +216,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # BVS
+        0x70 => lambda {
+          offset = next_byte
+          @pc = branch(offset) if @status.overflow?
+        },
+
         # SEI
         0x78 => lambda {
           @status.interupt_disable = true
