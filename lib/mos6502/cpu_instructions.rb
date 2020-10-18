@@ -106,6 +106,15 @@ module Mos6502
           @status.carry = false
         },
 
+        # JSR
+        0x20 => lambda {
+          jump_to = next_word
+          return_to = @pc - 1
+          stack_push((return_to >> 8) & 0xff)
+          stack_push(return_to & 0xff)
+          @pc = jump_to
+        },
+
         # PLP
         0x28 => lambda {
           @status.decode(stack_pop)
