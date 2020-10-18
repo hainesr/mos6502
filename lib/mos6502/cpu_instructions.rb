@@ -180,6 +180,12 @@ module Mos6502
           @pc = absolute
         },
 
+        # BVC
+        0x50 => lambda {
+          offset = next_byte
+          @pc = branch(offset) unless @status.overflow?
+        },
+
         # CLI
         0x58 => lambda {
           @status.interupt_disable = false
