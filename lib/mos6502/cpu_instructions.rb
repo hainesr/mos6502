@@ -140,6 +140,12 @@ module Mos6502
           @status.carry = true
         },
 
+        # RTI
+        0x40 => lambda {
+          @status.decode(stack_pop)
+          @pc = (stack_pop | (stack_pop << 8))
+        },
+
         # PHA
         0x48 => lambda {
           stack_push(@a)
