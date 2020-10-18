@@ -157,6 +157,11 @@ module Mos6502
           @status.interupt_disable = false
         },
 
+        # RTS
+        0x60 => lambda {
+          @pc = (stack_pop | (stack_pop << 8)) + 1
+        },
+
         # PLA
         0x68 => lambda {
           @a = stack_pop

@@ -129,6 +129,18 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.interupt_disable?)
   end
 
+  def test_0x60
+    @cpu.load!([0x20, 0x05, 0x06, 0xa0, 0x0f, 0x60])
+    @cpu.step
+    assert_equal(0x0605, @cpu.pc)
+    assert_equal(0xfd, @cpu.sp)
+    @cpu.step
+    assert_equal(0x0603, @cpu.pc)
+    assert_equal(0xff, @cpu.sp)
+    @cpu.step
+    assert_equal(0x0f, @cpu.y)
+  end
+
   def test_0x69_2scomp
     @cpu.load!(
       [0xa9, 0x03, 0x69, 0x02, 0x69, 0xfa, 0x69, 0x01, 0x69, 0x80, 0x69, 0x80]
