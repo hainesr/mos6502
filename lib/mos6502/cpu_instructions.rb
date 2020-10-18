@@ -276,6 +276,12 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # BCS
+        0xb0 => lambda {
+          offset = next_byte
+          @pc = branch(offset) if @status.carry?
+        },
+
         # CLV
         0xb8 => lambda {
           @status.overflow = false
