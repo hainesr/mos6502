@@ -162,6 +162,12 @@ module Mos6502
           stack_push(@a)
         },
 
+        # EOR (immediate)
+        0x49 => lambda {
+          @a ^= next_byte
+          set_nz_flags(@a)
+        },
+
         # LSR (accumulator)
         0x4a => lambda {
           set_carry(@a, 0)
