@@ -8,15 +8,6 @@ module Mos6502
   class Cpu
     private
 
-    def set_nz_flags(value) # rubocop:disable Naming/AccessorMethodName
-      @status.zero = value.zero?
-      @status.negative = value & 0x80
-    end
-
-    def set_carry(value, bit)
-      @status.carry = (value >> bit) & 1
-    end
-
     def compare(register, value)
       @status.carry = register >= value
       set_nz_flags(register - value)

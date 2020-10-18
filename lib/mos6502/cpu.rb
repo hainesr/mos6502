@@ -96,6 +96,17 @@ module Mos6502
       (next_word + register)
     end
 
+    # Status access.
+    def set_nz_flags(value) # rubocop:disable Naming/AccessorMethodName
+      @status.zero = value.zero?
+      @status.negative = value & 0x80
+    end
+
+    def set_carry(value, bit)
+      @status.carry = (value >> bit) & 1
+    end
+
+    # Reset!
     def reset!
       @memory = Memory.new
       @pc = @initial_pc
