@@ -134,6 +134,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # BMI
+        0x30 => lambda {
+          offset = next_byte
+          @pc = branch(offset) if @status.negative?
+        },
+
         # SEC
         0x38 => lambda {
           @status.carry = true
