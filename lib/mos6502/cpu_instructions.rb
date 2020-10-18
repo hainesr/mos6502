@@ -169,6 +169,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # JMP (absolute)
+        0x4c => lambda {
+          @pc = absolute
+        },
+
         # CLI
         0x58 => lambda {
           @status.interupt_disable = false
