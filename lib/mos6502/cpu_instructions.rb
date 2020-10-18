@@ -339,6 +339,12 @@ module Mos6502
         # NOP
         0xea => lambda {}, # rubocop:disable Style/Lambda
 
+        # BEQ
+        0xf0 => lambda {
+          offset = next_byte
+          @pc = branch(offset) if @status.zero?
+        },
+
         # SED
         0xf8 => lambda {
           @status.decimal_mode = true
