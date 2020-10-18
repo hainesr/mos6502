@@ -344,6 +344,11 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # CMP (absolute)
+        0xcd => lambda {
+          compare(@a, @memory.get(absolute))
+        },
+
         # BNE
         0xd0 => lambda {
           offset = next_byte
