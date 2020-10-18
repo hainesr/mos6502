@@ -214,6 +214,12 @@ module Mos6502
           @memory.set(absolute, @a)
         },
 
+        # BCC
+        0x90 => lambda {
+          offset = next_byte
+          @pc = branch(offset) unless @status.carry?
+        },
+
         # STA (zero page, X)
         0x95 => lambda {
           @memory.set(zero_page(@x), @a)
