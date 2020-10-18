@@ -100,6 +100,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # BPL
+        0x10 => lambda {
+          offset = next_byte
+          @pc = branch(offset) unless @status.negative?
+        },
+
         # CLC
         0x18 => lambda {
           @status.carry = false
