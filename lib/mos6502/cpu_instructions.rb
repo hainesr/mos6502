@@ -113,7 +113,7 @@ module Mos6502
 
         # JSR
         0x20 => lambda {
-          jump_to = next_word
+          jump_to = absolute
           return_to = @pc - 1
           stack_push((return_to >> 8) & 0xff)
           stack_push(return_to & 0xff)
@@ -301,7 +301,7 @@ module Mos6502
 
         # LDA (absolute)
         0xad => lambda {
-          @a = @memory.get(next_word)
+          @a = @memory.get(absolute)
           set_nz_flags(@a)
         },
 
