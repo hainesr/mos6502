@@ -315,6 +315,12 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # BNE
+        0xd0 => lambda {
+          offset = next_byte
+          @pc = branch(offset) unless @status.zero?
+        },
+
         # CLD
         0xd8 => lambda {
           @status.decimal_mode = false
