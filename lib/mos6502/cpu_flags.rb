@@ -68,7 +68,7 @@ module Mos6502
 
     def encode
       [
-        @negative, @overflow, true, @break, @decimal_mode,
+        @negative, @overflow, true, true, @decimal_mode,
         @interupt_disable, @zero, @carry
       ].reduce(0) { |acc, flag| (acc << 1) + get_flag(flag) }
     end

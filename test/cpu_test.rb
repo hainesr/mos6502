@@ -22,7 +22,7 @@ class Mos6502::CpuTest < Minitest::Test
     assert_equal(0x600, cpu.pc)
     assert_equal(
       'a: 0x00, x: 0x00, y: 0x00, sp: 0xff, ' \
-      'pc: 0x0600, op: 0x00, status: 0b00100000',
+      'pc: 0x0600, op: 0x00, status: 0b00110000',
       cpu.inspect
     )
   end
@@ -36,7 +36,7 @@ class Mos6502::CpuTest < Minitest::Test
     assert_equal(0x500, cpu.pc)
     assert_equal(
       'a: 0x00, x: 0x00, y: 0x00, sp: 0xff, ' \
-      'pc: 0x0500, op: 0x00, status: 0b00100000',
+      'pc: 0x0500, op: 0x00, status: 0b00110000',
       cpu.inspect
     )
   end

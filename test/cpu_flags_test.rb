@@ -75,16 +75,16 @@ class Mos6502::CpuFlagsTest < Minitest::Test
   end
 
   def test_encode
-    assert_equal(0b00100000, @flags.encode)
+    assert_equal(0b00110000, @flags.encode)
 
     @flags.carry = true
-    assert_equal(0b00100001, @flags.encode)
+    assert_equal(0b00110001, @flags.encode)
 
     @flags.negative = true
-    assert_equal(0b10100001, @flags.encode)
+    assert_equal(0b10110001, @flags.encode)
 
     @flags.interupt_disable = true
-    assert_equal(0b10100101, @flags.encode)
+    assert_equal(0b10110101, @flags.encode)
 
     @flags.break = true
     assert_equal(0b10110101, @flags.encode)

@@ -27,7 +27,7 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     @cpu.step
     assert_equal(0x00, @cpu.a)
     @cpu.step
-    assert_equal(0x25, @cpu.a)
+    assert_equal(0x35, @cpu.a)
   end
 
   def test_0x0a
@@ -138,7 +138,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert(@cpu.break?)
     @cpu.step
     assert_equal(0x60b, @cpu.pc)
-    refute(@cpu.break?)
     @cpu.step
     assert_equal(0x0f, @cpu.y)
   end
