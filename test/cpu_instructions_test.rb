@@ -17,7 +17,9 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     @cpu.step
     assert_equal(0x0000, @cpu.pc)
     assert_equal(0xfc, @cpu.sp)
+    assert_equal([0x02, 0x06], @cpu.dump_memory(0x01fe, 2))
     assert(@cpu.break?)
+    assert(@cpu.interupt_disable?)
   end
 
   def test_0x08
@@ -125,7 +127,7 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
   def test_0x40
     @cpu.load!(
       [
-        0xa9, 0x06, 0x8d, 0xff, 0xff, 0x69, 0x07, 0x8d, 0xfe, 0xff, 0x00,
+        0xa9, 0x06, 0x8d, 0xff, 0xff, 0x69, 0x08, 0x8d, 0xfe, 0xff, 0x00, 0x00,
         0xa0, 0x0f, 0x40
       ]
     )
@@ -134,10 +136,10 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     @cpu.step
     @cpu.step
     @cpu.step
-    assert_equal(0x60d, @cpu.pc)
+    assert_equal(0x60e, @cpu.pc)
     assert(@cpu.break?)
     @cpu.step
-    assert_equal(0x60b, @cpu.pc)
+    assert_equal(0x60c, @cpu.pc)
     @cpu.step
     assert_equal(0x0f, @cpu.y)
   end
