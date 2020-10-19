@@ -237,6 +237,11 @@ module Mos6502
           @memory.set(zero_page, @a)
         },
 
+        # STX (zero page)
+        0x86 => lambda {
+          @memory.set(zero_page, @x)
+        },
+
         # DEY
         0x88 => lambda {
           @y = (@y - 1) & 0xff
