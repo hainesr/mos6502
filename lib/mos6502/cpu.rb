@@ -97,6 +97,10 @@ module Mos6502
       (next_word + register)
     end
 
+    def indirect
+      @memory.get_word(next_word)
+    end
+
     # Status access.
     def set_nz_flags(value) # rubocop:disable Naming/AccessorMethodName
       @status.zero = value.zero?
