@@ -344,6 +344,12 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # LDA (absolute, X)
+        0xbd => lambda {
+          @a = @memory.get(absolute(@x))
+          set_nz_flags(@a)
+        },
+
         # CPY (immediate)
         0xc0 => lambda {
           compare(@y, next_byte)
