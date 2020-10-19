@@ -95,6 +95,12 @@ module Mos6502
           stack_push(@status.encode)
         },
 
+        # ORA (immediate)
+        0x09 => lambda {
+          @a |= next_byte
+          set_nz_flags(@a)
+        },
+
         # ASL (accumulator)
         0x0a => lambda {
           set_carry(@a, 7)
