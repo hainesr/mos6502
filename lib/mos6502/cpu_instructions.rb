@@ -305,6 +305,12 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # LDX (zero page)
+        0xa6 => lambda {
+          @x = @memory.get(zero_page)
+          set_nz_flags(@x)
+        },
+
         # TAY
         0xa8 => lambda {
           @y = @a & 0xff
