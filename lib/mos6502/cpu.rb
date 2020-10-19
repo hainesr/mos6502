@@ -57,7 +57,8 @@ module Mos6502
     def inspect
       format(
         'a: 0x%02x, x: 0x%02x, y: 0x%02x, sp: 0x%02x, ' \
-        'pc: 0x%04x, status: 0b%08b', @a, @x, @y, @sp, @pc, @status.encode
+        'pc: 0x%04x, op: 0x%02x, status: 0b%08b',
+        @a, @x, @y, @sp, @pc, @memory.get(@pc), @status.encode
       )
     end
 
