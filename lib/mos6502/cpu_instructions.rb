@@ -216,6 +216,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # JMP (indirect)
+        0x6c => lambda {
+          @pc = indirect
+        },
+
         # BVS
         0x70 => lambda {
           offset = next_byte
