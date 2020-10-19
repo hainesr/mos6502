@@ -67,12 +67,18 @@ module Mos6502
     # Stack access.
     def stack_push(value)
       @memory.set((@sp & 0xff) + 0x0100, value)
+
+      # Decrement the stack pointer, and wrap it if it goes below 0.
       @sp -= 1
+      @sp = @sp &= 0xff if @sp < 0 # rubocop:disable Style/NumericPredicate
     end
 
     def stack_pop
+      # Increment the stack pointer, and wrap it if it goes above 255.
       @sp += 1
-      @memory.get(@sp + 0x0100)
+      @sp = @sp &= 0xff if @sp > 0xff
+
+      @memory.get((@sp & 0xff) + 0x0100)
     end
 
     # Program access.
