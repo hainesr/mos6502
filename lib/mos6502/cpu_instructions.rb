@@ -414,6 +414,11 @@ module Mos6502
           @status.decimal_mode = false
         },
 
+        # CMP (absolute, Y)
+        0xd9 => lambda {
+          compare(@a, @memory.get(absolute(@y)))
+        },
+
         # CPX (immediate)
         0xe0 => lambda {
           compare(@x, next_byte)
