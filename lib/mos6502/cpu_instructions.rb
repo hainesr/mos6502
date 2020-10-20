@@ -353,6 +353,12 @@ module Mos6502
           @pc = branch(offset) if @status.carry?
         },
 
+        # LDX (zero page, Y)
+        0xb6 => lambda {
+          @x = @memory.get(zero_page(@y))
+          set_nz_flags(@x)
+        },
+
         # CLV
         0xb8 => lambda {
           @status.overflow = false
