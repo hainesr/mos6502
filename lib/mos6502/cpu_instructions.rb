@@ -358,6 +358,12 @@ module Mos6502
           @pc = branch(offset) if @status.carry?
         },
 
+        # LDY (zero page, X)
+        0xb4 => lambda {
+          @y = @memory.get(zero_page(@x))
+          set_nz_flags(@y)
+        },
+
         # LDX (zero page, Y)
         0xb6 => lambda {
           @x = @memory.get(zero_page(@y))
