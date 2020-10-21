@@ -273,6 +273,11 @@ module Mos6502
           @pc = branch(offset) unless @status.carry?
         },
 
+        # STY (zero page, X)
+        0x94 => lambda {
+          @memory.set(zero_page(@x), @y)
+        },
+
         # STA (zero page, X)
         0x95 => lambda {
           @memory.set(zero_page(@x), @a)
