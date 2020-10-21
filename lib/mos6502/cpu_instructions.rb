@@ -442,6 +442,11 @@ module Mos6502
           compare(@a, @memory.get(absolute(@y)))
         },
 
+        # CMP (absolute, X)
+        0xdd => lambda {
+          compare(@a, @memory.get(absolute(@x)))
+        },
+
         # CPX (immediate)
         0xe0 => lambda {
           compare(@x, next_byte)
