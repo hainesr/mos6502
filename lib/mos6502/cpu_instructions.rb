@@ -369,6 +369,12 @@ module Mos6502
           @status.overflow = false
         },
 
+        # LDA (absolute, Y)
+        0xb9 => lambda {
+          @a = @memory.get(absolute(@y))
+          set_nz_flags(@a)
+        },
+
         # TSX
         0xba => lambda {
           @x = @sp & 0xff

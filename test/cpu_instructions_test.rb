@@ -565,6 +565,13 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.overflow?)
   end
 
+  def test_0xb9
+    @cpu.load!([0xa0, 0x01, 0xb9, 0x01, 0x06])
+    @cpu.step
+    @cpu.step
+    assert_equal(0xb9, @cpu.a)
+  end
+
   def test_0xba
     @cpu.load!([0xba])
     @cpu.step
