@@ -566,6 +566,16 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert(@cpu.negative?)
   end
 
+  def test_0xb5
+    @cpu.load!([0xa2, 0x80, 0x86, 0x05, 0xb5, 0x85])
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert_equal(0x80, @cpu.a)
+    assert_equal(0x80, @cpu.x)
+    assert(@cpu.negative?)
+  end
+
   def test_0xb6
     @cpu.load!([0xa9, 0x80, 0x85, 0x05, 0xa8, 0xb6, 0x85])
     @cpu.step
