@@ -490,6 +490,11 @@ module Mos6502
           compare(@x, next_byte)
         },
 
+        # CPX (zero page)
+        0xe4 => lambda {
+          compare(@x, @memory.get(zero_page))
+        },
+
         # INX
         0xe8 => lambda {
           @x = (@x + 1) & 0xff
