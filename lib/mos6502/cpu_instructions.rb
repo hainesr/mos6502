@@ -267,6 +267,11 @@ module Mos6502
           @memory.set(absolute, @a)
         },
 
+        # STX (absolute)
+        0x8e => lambda {
+          @memory.set(absolute, @x)
+        },
+
         # BCC
         0x90 => lambda {
           offset = next_byte
