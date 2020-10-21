@@ -362,6 +362,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # LDX (absolute)
+        0xae => lambda {
+          @x = @memory.get(absolute)
+          set_nz_flags(@x)
+        },
+
         # BCS
         0xb0 => lambda {
           offset = next_byte
