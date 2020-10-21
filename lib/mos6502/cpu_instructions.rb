@@ -443,6 +443,11 @@ module Mos6502
           @pc = branch(offset) unless @status.zero?
         },
 
+        # CMP (zero page, X)
+        0xd5 => lambda {
+          compare(@a, @memory.get(zero_page(@x)))
+        },
+
         # CLD
         0xd8 => lambda {
           @status.decimal_mode = false
