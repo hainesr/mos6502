@@ -367,6 +367,12 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # LDY (absolute)
+        0xac => lambda {
+          @y = @memory.get(absolute)
+          set_nz_flags(@y)
+        },
+
         # LDA (absolute)
         0xad => lambda {
           @a = @memory.get(absolute)
