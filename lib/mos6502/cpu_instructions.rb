@@ -240,6 +240,11 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # STY (zero page)
+        0x84 => lambda {
+          @memory.set(zero_page, @y)
+        },
+
         # STA (zero page)
         0x85 => lambda {
           @memory.set(zero_page, @a)
