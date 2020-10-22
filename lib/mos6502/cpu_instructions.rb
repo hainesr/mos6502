@@ -262,6 +262,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # STY (absolute)
+        0x8c => lambda {
+          @memory.set(absolute, @y)
+        },
+
         # STA (absolute)
         0x8d => lambda {
           @memory.set(absolute, @a)
