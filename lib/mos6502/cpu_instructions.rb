@@ -454,6 +454,11 @@ module Mos6502
           compare(@y, next_byte)
         },
 
+        # CPY (zero page)
+        0xc4 => lambda {
+          compare(@y, @memory.get(zero_page))
+        },
+
         # CMP (zero page)
         0xc5 => lambda {
           compare(@a, @memory.get(zero_page))
