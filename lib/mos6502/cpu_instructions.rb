@@ -481,6 +481,11 @@ module Mos6502
           set_nz_flags(@x)
         },
 
+        # CPY (absolute)
+        0xcc => lambda {
+          compare(@y, @memory.get(absolute))
+        },
+
         # CMP (absolute)
         0xcd => lambda {
           compare(@a, @memory.get(absolute))
