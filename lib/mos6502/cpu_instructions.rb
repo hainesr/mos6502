@@ -509,6 +509,11 @@ module Mos6502
         # NOP
         0xea => lambda {}, # rubocop:disable Style/Lambda
 
+        # CPX (absolute)
+        0xec => lambda {
+          compare(@x, @memory.get(absolute))
+        },
+
         # BEQ
         0xf0 => lambda {
           offset = next_byte
