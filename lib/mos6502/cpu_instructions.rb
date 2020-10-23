@@ -396,6 +396,12 @@ module Mos6502
           @pc = branch(offset) if @status.carry?
         },
 
+        # LDA (indirect indexed)
+        0xb1 => lambda {
+          @a = @memory.get(indirect_indexed(@y))
+          set_nz_flags(@a)
+        },
+
         # LDY (zero page, X)
         0xb4 => lambda {
           @y = @memory.get(zero_page(@x))
