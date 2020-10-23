@@ -107,6 +107,10 @@ module Mos6502
       @memory.get_word(next_word)
     end
 
+    def indirect_indexed(register)
+      @memory.get_word(next_byte) + register
+    end
+
     # Status access.
     def set_nz_flags(value) # rubocop:disable Naming/AccessorMethodName
       @status.zero = value.zero?
