@@ -194,6 +194,12 @@ module Mos6502
           @status.interupt_disable = false
         },
 
+        # LSR (absolute, X)
+        0x5e => lambda {
+          address = absolute(@x)
+          @memory.set(address, lsr(@memory.get(address)))
+        },
+
         # RTS
         0x60 => lambda {
           @pc = (stack_pop | (stack_pop << 8)) + 1
