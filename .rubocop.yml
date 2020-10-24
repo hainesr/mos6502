@@ -19,10 +19,11 @@ Metrics/BlockLength:
     - 'test/**/*.rb'
 
 # Ignore class length failures in the tests.
-# Also ignore in the CPU instructions file, which is unavoidably big.
+# Also ignore in the CPU instructions files, which are unavoidably big.
 Metrics/ClassLength:
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Set a slightly higher default for this.
