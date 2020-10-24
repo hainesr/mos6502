@@ -61,6 +61,12 @@ module Mos6502
       set_nz_flags(register - value)
     end
 
+    def inc(value)
+      value = (value + 1) & 0xff
+      set_nz_flags(value)
+      value
+    end
+
     def lsr(value)
       set_carry(value, 0)
       value = value >> 1
