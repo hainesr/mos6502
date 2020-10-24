@@ -157,6 +157,18 @@ module Mos6502
           @pc = (stack_pop | (stack_pop << 8)) + 1
         },
 
+        # ROR (zero page)
+        0x66 => lambda {
+          address = zero_page
+          value = @memory.get(address)
+          carry = @status.carry?
+          set_carry(value, 0)
+          value = value >> 1
+          value |= 0x80 if carry
+          @memory.set(address, value)
+          set_nz_flags(value)
+        },
+
         # PLA
         0x68 => lambda {
           @a = stack_pop
