@@ -335,6 +335,12 @@ module Mos6502
           set_nz_flags(@y)
         },
 
+        # LDA (indexed indirect)
+        0xa1 => lambda {
+          @a = @memory.get(indexed_indirect)
+          set_nz_flags(@a)
+        },
+
         # LDX (immediate)
         0xa2 => lambda {
           @x = next_byte
