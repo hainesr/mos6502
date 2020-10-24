@@ -492,6 +492,11 @@ module Mos6502
           compare(@y, next_byte)
         },
 
+        # CMP (indexed indirect)
+        0xc1 => lambda {
+          compare(@a, @memory.get(indexed_indirect))
+        },
+
         # CPY (zero page)
         0xc4 => lambda {
           compare(@y, @memory.get(zero_page))
