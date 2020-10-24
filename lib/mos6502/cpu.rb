@@ -107,6 +107,10 @@ module Mos6502
       @memory.get_word(next_word)
     end
 
+    def indexed_indirect
+      @memory.get_word(zero_page(@x))
+    end
+
     def indirect_indexed
       @memory.get_word(next_byte) + @y
     end
