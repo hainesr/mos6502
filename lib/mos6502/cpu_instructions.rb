@@ -57,6 +57,12 @@ module Mos6502
           @pc = branch(offset) unless @status.negative?
         },
 
+        # ASL (zero page, X)
+        0x16 => lambda {
+          address = zero_page(@x)
+          @memory.set(address, asl(@memory.get(address)))
+        },
+
         # CLC
         0x18 => lambda {
           @status.carry = false
