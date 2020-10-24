@@ -209,6 +209,17 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0x0f, @cpu.y)
   end
 
+  def test_0x46
+    @cpu.load!([0xa9, 0x7f, 0x85, 0x70, 0x46, 0x70])
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    refute(@cpu.zero?)
+    assert_equal([0x3f], @cpu.dump_memory(0x70, 1))
+  end
+
   def test_0x48_0x68
     @cpu.load!([0xa9, 0x44, 0x48, 0xa9, 0x00, 0x68])
     @cpu.step

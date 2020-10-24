@@ -192,6 +192,16 @@ module Mos6502
           @pc = (stack_pop | (stack_pop << 8))
         },
 
+        # LSR (zero page)
+        0x46 => lambda {
+          address = zero_page
+          value = @memory.get(address)
+          set_carry(value, 0)
+          value = value >> 1
+          @memory.set(address, value)
+          set_nz_flags(value)
+        },
+
         # PHA
         0x48 => lambda {
           stack_push(@a)
