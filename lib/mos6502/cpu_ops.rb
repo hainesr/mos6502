@@ -61,6 +61,12 @@ module Mos6502
       set_nz_flags(register - value)
     end
 
+    def dec(value)
+      value = (value - 1) & 0xff
+      set_nz_flags(value)
+      value
+    end
+
     def inc(value)
       value = (value + 1) & 0xff
       set_nz_flags(value)

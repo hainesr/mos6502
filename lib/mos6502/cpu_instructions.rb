@@ -518,6 +518,12 @@ module Mos6502
           compare(@a, @memory.get(zero_page))
         },
 
+        # DEC (zero page)
+        0xc6 => lambda {
+          address = zero_page
+          @memory.set(address, dec(@memory.get(address)))
+        },
+
         # INY
         0xc8 => lambda {
           @y = (@y + 1) & 0xff
