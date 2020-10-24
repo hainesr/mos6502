@@ -232,6 +232,12 @@ module Mos6502
           @pc = branch(offset) if @status.overflow?
         },
 
+        # ROR (zero page, X)
+        0x76 => lambda {
+          address = zero_page(@x)
+          @memory.set(address, ror(@memory.get(address)))
+        },
+
         # SEI
         0x78 => lambda {
           @status.interupt_disable = true
