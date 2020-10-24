@@ -288,6 +288,11 @@ module Mos6502
           @pc = branch(offset) unless @status.carry?
         },
 
+        # STA (indirect indexed)
+        0x91 => lambda {
+          @memory.set(indirect_indexed(@y), @a)
+        },
+
         # STY (zero page, X)
         0x94 => lambda {
           @memory.set(zero_page(@x), @y)
