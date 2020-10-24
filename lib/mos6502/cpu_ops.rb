@@ -77,6 +77,15 @@ module Mos6502
       value
     end
 
+    def ror(value)
+      carry = @status.carry?
+      set_carry(value, 0)
+      value = value >> 1
+      value |= 0x80 if carry
+      set_nz_flags(value)
+      value
+    end
+
     def sbc(value)
       if @status.decimal_mode?
         carry = @status.carry? ? 1 : 0

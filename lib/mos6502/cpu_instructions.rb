@@ -160,13 +160,7 @@ module Mos6502
         # ROR (zero page)
         0x66 => lambda {
           address = zero_page
-          value = @memory.get(address)
-          carry = @status.carry?
-          set_carry(value, 0)
-          value = value >> 1
-          value |= 0x80 if carry
-          @memory.set(address, value)
-          set_nz_flags(value)
+          @memory.set(address, ror(@memory.get(address)))
         },
 
         # PLA
@@ -182,11 +176,7 @@ module Mos6502
 
         # ROR (accumulator)
         0x6a => lambda {
-          carry = @status.carry?
-          set_carry(@a, 0)
-          @a = @a >> 1
-          @a |= 0x80 if carry
-          set_nz_flags(@a)
+          @a = ror(@a)
         },
 
         # JMP (indirect)
