@@ -202,6 +202,12 @@ module Mos6502
           @pc = indirect
         },
 
+        # ROR (absolute)
+        0x6e => lambda {
+          address = absolute
+          @memory.set(address, ror(@memory.get(address)))
+        },
+
         # BVS
         0x70 => lambda {
           offset = next_byte
