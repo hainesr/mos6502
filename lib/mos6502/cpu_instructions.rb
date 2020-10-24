@@ -103,6 +103,12 @@ module Mos6502
           bit(@memory.get(absolute))
         },
 
+        # ROL (absolute)
+        0x2e => lambda {
+          address = absolute
+          @memory.set(address, rol(@memory.get(address)))
+        },
+
         # BMI
         0x30 => lambda {
           offset = next_byte
