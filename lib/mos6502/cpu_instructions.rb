@@ -635,6 +635,12 @@ module Mos6502
           @pc = branch(offset) if @status.zero?
         },
 
+        # INC (zero page, X)
+        0xf6 => lambda {
+          address = zero_page(@x)
+          @memory.set(address, inc(@memory.get(address)))
+        },
+
         # SED
         0xf8 => lambda {
           @status.decimal_mode = true
