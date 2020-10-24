@@ -77,6 +77,12 @@ module Mos6502
       end
     end
 
+    def bit(value)
+      @status.zero = (@a & value).zero?
+      @status.overflow = value & 0x40
+      @status.negative = value & 0x80
+    end
+
     def instructions
       {
         # BRK
@@ -126,6 +132,11 @@ module Mos6502
           stack_push((return_to >> 8) & 0xff)
           stack_push(return_to & 0xff)
           @pc = jump_to
+        },
+
+        # BIT (zero page)
+        0x24 => lambda {
+          bit(@memory.get(zero_page))
         },
 
         # PLP

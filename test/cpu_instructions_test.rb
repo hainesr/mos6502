@@ -83,6 +83,27 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0xfd, @cpu.sp)
   end
 
+  def test_0x24
+    @cpu.load!(
+      [0xa0, 0x77, 0x84, 0x20, 0xa9, 0x88, 0x24, 0x20, 0x98, 0x24, 0x20]
+    )
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert_equal(0x88, @cpu.a)
+    assert(@cpu.zero?)
+    assert(@cpu.overflow?)
+    refute(@cpu.negative?)
+
+    @cpu.step
+    @cpu.step
+    assert_equal(0x77, @cpu.a)
+    refute(@cpu.zero?)
+    assert(@cpu.overflow?)
+    refute(@cpu.negative?)
+  end
+
   def test_0x28
     @cpu.load!([0xa9, 0x4d, 0x48, 0x28])
     @cpu.step
