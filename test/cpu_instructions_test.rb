@@ -1177,6 +1177,25 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert(@cpu.zero?)
   end
 
+  def test_0xce
+    @cpu.load!(
+      [0xa9, 0x01, 0x8d, 0x92, 0x53, 0xce, 0x92, 0x53, 0xce, 0x92, 0x53]
+    )
+    @cpu.step
+    @cpu.step
+    assert_equal([0x01], @cpu.dump_memory(0x5392, 1))
+    refute(@cpu.negative?)
+    refute(@cpu.zero?)
+    @cpu.step
+    assert_equal([0x00], @cpu.dump_memory(0x5392, 1))
+    refute(@cpu.negative?)
+    assert(@cpu.zero?)
+    @cpu.step
+    assert_equal([0xff], @cpu.dump_memory(0x5392, 1))
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+  end
+
   def test_0xd0
     @cpu.load!([0xa2, 0x00, 0xd0, 0x03, 0xe8, 0xd0, 0xfb, 0xa0, 0xff])
     @cpu.step

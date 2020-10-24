@@ -551,6 +551,12 @@ module Mos6502
           compare(@a, @memory.get(absolute))
         },
 
+        # DEC (absolute)
+        0xce => lambda {
+          address = absolute
+          @memory.set(address, dec(@memory.get(address)))
+        },
+
         # BNE
         0xd0 => lambda {
           offset = next_byte
