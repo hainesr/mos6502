@@ -159,6 +159,11 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # BIT (absolute)
+        0x2c => lambda {
+          bit(@memory.get(absolute))
+        },
+
         # BMI
         0x30 => lambda {
           offset = next_byte
