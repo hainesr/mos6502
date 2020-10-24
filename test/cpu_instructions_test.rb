@@ -902,6 +902,38 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0xff, @cpu.y)
   end
 
+  def test_0xd1
+    @cpu.load!(
+      [
+        0xa9, 0x95, 0xa2, 0x06, 0x86, 0x76, 0xa0, 0x01,
+        0xd1, 0x75, 0xc8, 0xd1, 0x75, 0xc8, 0xd1, 0x75
+      ]
+    )
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert_equal(0x95, @cpu.a)
+    assert(@cpu.carry?)
+    refute(@cpu.negative?)
+    assert(@cpu.zero?)
+
+    @cpu.step
+    @cpu.step
+    assert_equal(0x95, @cpu.a)
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+
+    @cpu.step
+    @cpu.step
+    assert_equal(0x95, @cpu.a)
+    assert(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+  end
+
   def test_0xd5
     @cpu.load!([0xa9, 0x22, 0xaa, 0xca, 0x85, 0x32, 0xd5, 0x11])
     @cpu.step
