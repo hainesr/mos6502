@@ -171,6 +171,12 @@ module Mos6502
           @pc = branch(offset) unless @status.overflow?
         },
 
+        # LSR (zero page, X)
+        0x56 => lambda {
+          address = zero_page(@x)
+          @memory.set(address, lsr(@memory.get(address)))
+        },
+
         # CLI
         0x58 => lambda {
           @status.interupt_disable = false
