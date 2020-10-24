@@ -73,13 +73,7 @@ module Mos6502
         # ROL (zero page)
         0x26 => lambda {
           address = zero_page
-          value = @memory.get(address)
-          carry = @status.carry? ? 1 : 0
-          set_carry(value, 7)
-          value = (value << 1) & 0xff
-          value |= carry
-          @memory.set(address, value)
-          set_nz_flags(value)
+          @memory.set(address, rol(@memory.get(address)))
         },
 
         # PLP
@@ -95,11 +89,7 @@ module Mos6502
 
         # ROL (accumulator)
         0x2a => lambda {
-          carry = @status.carry? ? 1 : 0
-          set_carry(@a, 7)
-          @a = (@a << 1) & 0xff
-          @a |= carry
-          set_nz_flags(@a)
+          @a = rol(@a) & 0xff
         },
 
         # BIT (absolute)
