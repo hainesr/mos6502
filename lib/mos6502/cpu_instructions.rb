@@ -650,6 +650,12 @@ module Mos6502
         # SED
         0xf8 => lambda {
           @status.decimal_mode = true
+        },
+
+        # INC (absolute, X)
+        0xfe => lambda {
+          address = absolute(@x)
+          @memory.set(address, inc(@memory.get(address)))
         }
       }
     end
