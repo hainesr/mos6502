@@ -138,6 +138,12 @@ module Mos6502
           @status.carry = true
         },
 
+        # ROL (absolute, X)
+        0x3e => lambda {
+          address = absolute(@x)
+          @memory.set(address, rol(@memory.get(address)))
+        },
+
         # RTI
         0x40 => lambda {
           @status.decode(stack_pop)
