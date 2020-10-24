@@ -121,6 +121,12 @@ module Mos6502
           @pc = branch(offset) if @status.negative?
         },
 
+        # ROL (zero page, X)
+        0x36 => lambda {
+          address = zero_page(@x)
+          @memory.set(address, rol(@memory.get(address)))
+        },
+
         # SEC
         0x38 => lambda {
           @status.carry = true
