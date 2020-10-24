@@ -84,6 +84,13 @@ module Mos6502
       value
     end
 
+    def lsr(value)
+      set_carry(value, 0)
+      value = value >> 1
+      set_nz_flags(value)
+      value
+    end
+
     def bit(value)
       @status.zero = (@a & value).zero?
       @status.overflow = value & 0x40
@@ -195,11 +202,7 @@ module Mos6502
         # LSR (zero page)
         0x46 => lambda {
           address = zero_page
-          value = @memory.get(address)
-          set_carry(value, 0)
-          value = value >> 1
-          @memory.set(address, value)
-          set_nz_flags(value)
+          @memory.set(address, lsr(@memory.get(address)))
         },
 
         # PHA
@@ -215,9 +218,7 @@ module Mos6502
 
         # LSR (accumulator)
         0x4a => lambda {
-          set_carry(@a, 0)
-          @a = @a >> 1
-          set_nz_flags(@a)
+          @a = lsr(@a)
         },
 
         # JMP (absolute)
