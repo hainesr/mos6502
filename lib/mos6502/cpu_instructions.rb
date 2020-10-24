@@ -70,6 +70,18 @@ module Mos6502
           bit(@memory.get(zero_page))
         },
 
+        # ROL (zero page)
+        0x26 => lambda {
+          address = zero_page
+          value = @memory.get(address)
+          carry = @status.carry? ? 1 : 0
+          set_carry(value, 7)
+          value = (value << 1) & 0xff
+          value |= carry
+          @memory.set(address, value)
+          set_nz_flags(value)
+        },
+
         # PLP
         0x28 => lambda {
           @status.decode(stack_pop)
