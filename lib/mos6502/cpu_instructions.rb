@@ -147,6 +147,12 @@ module Mos6502
           @pc = absolute
         },
 
+        # LSR (absolute)
+        0x4e => lambda {
+          address = absolute
+          @memory.set(address, lsr(@memory.get(address)))
+        },
+
         # BVC
         0x50 => lambda {
           offset = next_byte
