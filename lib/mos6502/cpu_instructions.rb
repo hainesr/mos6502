@@ -573,6 +573,12 @@ module Mos6502
           compare(@a, @memory.get(zero_page(@x)))
         },
 
+        # DEC (zero page, X)
+        0xd6 => lambda {
+          address = zero_page(@x)
+          @memory.set(address, dec(@memory.get(address)))
+        },
+
         # CLD
         0xd8 => lambda {
           @status.decimal_mode = false
