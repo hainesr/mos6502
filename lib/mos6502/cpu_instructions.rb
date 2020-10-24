@@ -77,6 +77,13 @@ module Mos6502
       end
     end
 
+    def asl(value)
+      set_carry(value, 7)
+      value = value << 1
+      set_nz_flags(value)
+      value
+    end
+
     def bit(value)
       @status.zero = (@a & value).zero?
       @status.overflow = value & 0x40
@@ -99,11 +106,7 @@ module Mos6502
         # ASL (zero page)
         0x06 => lambda {
           address = zero_page
-          value = @memory.get(address)
-          set_carry(value, 7)
-          value = value << 1
-          @memory.set(address, value)
-          set_nz_flags(value)
+          @memory.set(address, asl(@memory.get(address)))
         },
 
         # PHP
@@ -119,9 +122,7 @@ module Mos6502
 
         # ASL (accumulator)
         0x0a => lambda {
-          set_carry(@a, 7)
-          @a = (@a << 1) & 0xff
-          set_nz_flags(@a)
+          @a = asl(@a) & 0xff
         },
 
         # BPL
