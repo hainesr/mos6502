@@ -526,8 +526,7 @@ module Mos6502
 
         # INY
         0xc8 => lambda {
-          @y = (@y + 1) & 0xff
-          set_nz_flags(@y)
+          @y = inc(@y) & 0xff
         },
 
         # CMP (immediate)
@@ -618,8 +617,7 @@ module Mos6502
 
         # INX
         0xe8 => lambda {
-          @x = (@x + 1) & 0xff
-          set_nz_flags(@x)
+          @x = inc(@x) & 0xff
         },
 
         # SBC (immediate)
