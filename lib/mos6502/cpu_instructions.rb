@@ -289,8 +289,7 @@ module Mos6502
 
         # DEY
         0x88 => lambda {
-          @y = (@y - 1) & 0xff
-          set_nz_flags(@y)
+          @y = dec(@y) & 0xff
         },
 
         # TXA
@@ -536,8 +535,7 @@ module Mos6502
 
         # DEX
         0xca => lambda {
-          @x = (@x - 1) & 0xff
-          set_nz_flags(@x)
+          @x = dec(@x) & 0xff
         },
 
         # CPY (absolute)
