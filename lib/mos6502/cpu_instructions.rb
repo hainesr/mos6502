@@ -594,6 +594,12 @@ module Mos6502
           compare(@a, @memory.get(absolute(@x)))
         },
 
+        # DEC (absolute, X)
+        0xde => lambda {
+          address = absolute(@x)
+          @memory.set(address, dec(@memory.get(address)))
+        },
+
         # CPX (immediate)
         0xe0 => lambda {
           compare(@x, next_byte)
