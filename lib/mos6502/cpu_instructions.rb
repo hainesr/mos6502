@@ -261,6 +261,12 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # ROR (absolute, X)
+        0x7e => lambda {
+          address = absolute(@x)
+          @memory.set(address, ror(@memory.get(address)))
+        },
+
         # STA (indexed indirect)
         0x81 => lambda {
           @memory.set(indexed_indirect, @a)
