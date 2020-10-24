@@ -45,6 +45,12 @@ module Mos6502
           @a = asl(@a) & 0xff
         },
 
+        # ASL (absolute)
+        0x0e => lambda {
+          address = absolute
+          @memory.set(address, asl(@memory.get(address)))
+        },
+
         # BPL
         0x10 => lambda {
           offset = next_byte
