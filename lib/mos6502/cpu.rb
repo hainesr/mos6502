@@ -107,8 +107,8 @@ module Mos6502
       @memory.get_word(next_word)
     end
 
-    def indirect_indexed(register)
-      @memory.get_word(next_byte) + register
+    def indirect_indexed
+      @memory.get_word(next_byte) + @y
     end
 
     # Status access.

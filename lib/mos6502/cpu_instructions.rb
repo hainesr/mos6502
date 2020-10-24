@@ -290,7 +290,7 @@ module Mos6502
 
         # STA (indirect indexed)
         0x91 => lambda {
-          @memory.set(indirect_indexed(@y), @a)
+          @memory.set(indirect_indexed, @a)
         },
 
         # STY (zero page, X)
@@ -403,7 +403,7 @@ module Mos6502
 
         # LDA (indirect indexed)
         0xb1 => lambda {
-          @a = @memory.get(indirect_indexed(@y))
+          @a = @memory.get(indirect_indexed)
           set_nz_flags(@a)
         },
 
@@ -510,7 +510,7 @@ module Mos6502
 
         # CMP (indirect indexed)
         0xd1 => lambda {
-          compare(@a, @memory.get(indirect_indexed(@y)))
+          compare(@a, @memory.get(indirect_indexed))
         },
 
         # CMP (zero page, X)
