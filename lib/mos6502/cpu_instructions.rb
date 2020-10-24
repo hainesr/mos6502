@@ -68,6 +68,12 @@ module Mos6502
           @status.carry = false
         },
 
+        # ASL (absolute, X)
+        0x1e => lambda {
+          address = absolute(@x)
+          @memory.set(address, asl(@memory.get(address)))
+        },
+
         # JSR
         0x20 => lambda {
           jump_to = absolute
