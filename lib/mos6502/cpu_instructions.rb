@@ -96,6 +96,16 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # ASL (zero page)
+        0x06 => lambda {
+          address = zero_page
+          value = @memory.get(address)
+          set_carry(value, 7)
+          value = value << 1
+          @memory.set(address, value)
+          set_nz_flags(value)
+        },
+
         # PHP
         0x08 => lambda {
           stack_push(@status.encode)

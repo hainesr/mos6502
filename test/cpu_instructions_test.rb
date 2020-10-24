@@ -22,6 +22,17 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert(@cpu.interupt_disable?)
   end
 
+  def test_0x06
+    @cpu.load!([0xa9, 0x7f, 0x85, 0x70, 0x06, 0x70])
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    refute(@cpu.carry?)
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+    assert_equal([0xfe], @cpu.dump_memory(0x70, 1))
+  end
+
   def test_0x08
     @cpu.load!([0x38, 0x78, 0x08, 0x68])
     @cpu.step
