@@ -5,11 +5,12 @@ AllCops:
   NewCops: enable
 
 # Set a slightly bigger default, and ignore ABC failures in the tests.
-# Also ignore in the CPU instructions file, which is unavoidably big.
+# Also ignore in the CPU instructions files, which are unavoidably big.
 Metrics/AbcSize:
   Max: 25
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Ignore block length failures in the tests.
@@ -33,10 +34,11 @@ Metrics/CyclomaticComplexity:
     - 'lib/mos6502/cpu_instructions.rb'
 
 # Ignore method length failures in the tests.
-# Also ignore in the CPU instructions file, which is unavoidably big.
+# Also ignore in the CPU instructions files, which are unavoidably big.
 Metrics/MethodLength:
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Ignore module length failures in the tests.
