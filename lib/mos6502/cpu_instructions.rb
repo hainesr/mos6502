@@ -192,6 +192,12 @@ module Mos6502
           @pc = (stack_pop | (stack_pop << 8))
         },
 
+        # EOR (indexed indirect)
+        0x41 => lambda {
+          @a ^= @memory.get(indexed_indirect)
+          set_nz_flags(@a)
+        },
+
         # EOR (zero page)
         0x45 => lambda {
           @a ^= @memory.get(zero_page)
