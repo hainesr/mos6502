@@ -156,6 +156,12 @@ module Mos6502
           @status.carry = true
         },
 
+        # AND (absolute, X)
+        0x3d => lambda {
+          @a &= @memory.get(absolute(@x))
+          set_nz_flags(@a)
+        },
+
         # ROL (absolute, X)
         0x3e => lambda {
           address = absolute(@x)
