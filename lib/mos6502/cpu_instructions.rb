@@ -69,6 +69,12 @@ module Mos6502
           @pc = branch(offset) unless @status.negative?
         },
 
+        # ORA (zero page, X)
+        0x15 => lambda {
+          @a |= @memory.get(zero_page(@x))
+          set_nz_flags(@a)
+        },
+
         # ASL (zero page, X)
         0x16 => lambda {
           address = zero_page(@x)
