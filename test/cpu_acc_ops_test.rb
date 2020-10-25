@@ -10,6 +10,7 @@ require 'mos6502'
 class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   def test_immediate
     [
+      [0x09, 0x77, false, false], # ORA
       [0x29, 0x11, false, false], # AND
       [0x49, 0x66, false, false]  # EOR
     ].each do |opcode, result, negative, zero|
