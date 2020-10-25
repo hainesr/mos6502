@@ -156,6 +156,12 @@ module Mos6502
           @status.carry = true
         },
 
+        # AND (absolute, Y)
+        0x39 => lambda {
+          @a &= @memory.get(absolute(@y))
+          set_nz_flags(@a)
+        },
+
         # AND (absolute, X)
         0x3d => lambda {
           @a &= @memory.get(absolute(@x))
