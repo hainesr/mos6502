@@ -140,7 +140,8 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
 
   def test_indirect_indexed
     [
-      [0x31, 0x20, false, false] # AND
+      [0x31, 0x20, false, false], # AND
+      [0x51, 0x9f, true, false]   # EOR
     ].each do |opcode, result, negative, zero|
       cpu = Mos6502::Cpu.new
       cpu.load!([0xa2, 0x06, 0x86, 0x76, 0xa0, 0x04, 0xa9, 0x3f, opcode, 0x75])

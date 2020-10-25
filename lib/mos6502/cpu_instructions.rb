@@ -249,6 +249,12 @@ module Mos6502
           @pc = branch(offset) unless @status.overflow?
         },
 
+        # EOR (indirect indexed)
+        0x51 => lambda {
+          @a ^= @memory.get(indirect_indexed)
+          set_nz_flags(@a)
+        },
+
         # EOR (zero page, X)
         0x55 => lambda {
           @a ^= @memory.get(zero_page(@x))
