@@ -129,18 +129,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0xfd, @cpu.sp)
   end
 
-  def test_0x21
-    @cpu.load!([0xa9, 0xb3, 0xa2, 0xd0, 0x81, 0x41, 0xa9, 0x3f, 0x21, 0x41])
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0x33, @cpu.a)
-    refute(@cpu.negative?)
-    refute(@cpu.zero?)
-  end
-
   def test_0x24
     @cpu.load!(
       [0xa0, 0x77, 0x84, 0x20, 0xa9, 0x88, 0x24, 0x20, 0x98, 0x24, 0x20]
@@ -160,17 +148,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.zero?)
     assert(@cpu.overflow?)
     refute(@cpu.negative?)
-  end
-
-  def test_0x25
-    @cpu.load!([0xa9, 0xb3, 0xa2, 0x80, 0x86, 0x41, 0x25, 0x41])
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0x80, @cpu.a)
-    assert(@cpu.negative?)
-    refute(@cpu.zero?)
   end
 
   def test_0x26
@@ -199,14 +176,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert(@cpu.carry?)
     assert(@cpu.decimal_mode?)
     assert(@cpu.interupt_disable?)
-  end
-
-  def test_0x29
-    @cpu.load!([0xa9, 0x33, 0x29, 0x55])
-    @cpu.step
-    @cpu.step
-    assert_equal(0x11, @cpu.a)
-    assert_equal(0x604, @cpu.pc)
   end
 
   def test_0x2a
@@ -244,17 +213,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.negative?)
   end
 
-  def test_0x2d
-    @cpu.load!([0xa9, 0x33, 0xa2, 0xcc, 0x8e, 0x41, 0x85, 0x2d, 0x41, 0x85])
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0x00, @cpu.a)
-    refute(@cpu.negative?)
-    assert(@cpu.zero?)
-  end
-
   def test_0x2e
     @cpu.load!([0xa9, 0x7f, 0x8d, 0x0f, 0x70, 0x2e, 0x0f, 0x70])
     @cpu.step
@@ -280,29 +238,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert_equal(0xff, @cpu.y)
   end
 
-  def test_0x31
-    @cpu.load!([0xa2, 0x06, 0x86, 0x76, 0xa0, 0x04, 0xa9, 0x3f, 0x31, 0x75])
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0x20, @cpu.a)
-    refute(@cpu.negative?)
-    refute(@cpu.zero?)
-  end
-
-  def test_0x35
-    @cpu.load!([0xa9, 0xb3, 0xa2, 0x12, 0xa0, 0xb3, 0x94, 0x41, 0x35, 0x41])
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0xb3, @cpu.a)
-    assert(@cpu.negative?)
-    refute(@cpu.zero?)
-  end
-
   def test_0x36
     @cpu.load!([0xa9, 0x7f, 0xa2, 0xbc, 0x95, 0x70, 0x36, 0x70])
     @cpu.step
@@ -313,34 +248,6 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     assert(@cpu.negative?)
     refute(@cpu.zero?)
     assert_equal([0xfe], @cpu.dump_memory(0x2c, 1))
-  end
-
-  def test_0x39
-    @cpu.load!(
-      [0xa9, 0x33, 0xa0, 0x56, 0xa2, 0xcc, 0x8e, 0x97, 0x85, 0x39, 0x97, 0x85]
-    )
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0x00, @cpu.a)
-    refute(@cpu.negative?)
-    assert(@cpu.zero?)
-  end
-
-  def test_0x3d
-    @cpu.load!(
-      [0xa9, 0x33, 0xa2, 0x56, 0xa0, 0xcc, 0x8c, 0x97, 0x85, 0x3d, 0x97, 0x85]
-    )
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    @cpu.step
-    assert_equal(0x00, @cpu.a)
-    refute(@cpu.negative?)
-    assert(@cpu.zero?)
   end
 
   def test_0x3e
