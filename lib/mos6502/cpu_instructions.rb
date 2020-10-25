@@ -260,6 +260,12 @@ module Mos6502
           @status.interupt_disable = false
         },
 
+        # EOR (absolute, Y)
+        0x59 => lambda {
+          @a ^= @memory.get(absolute(@y))
+          set_nz_flags(@a)
+        },
+
         # EOR (absolute, X)
         0x5d => lambda {
           @a ^= @memory.get(absolute(@x))
