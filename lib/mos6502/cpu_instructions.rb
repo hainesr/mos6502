@@ -88,6 +88,12 @@ module Mos6502
           bit(@memory.get(zero_page))
         },
 
+        # AND (zero page)
+        0x25 => lambda {
+          @a &= @memory.get(zero_page)
+          set_nz_flags(@a)
+        },
+
         # ROL (zero page)
         0x26 => lambda {
           address = zero_page
