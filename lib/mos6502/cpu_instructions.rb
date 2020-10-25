@@ -192,6 +192,12 @@ module Mos6502
           @pc = (stack_pop | (stack_pop << 8))
         },
 
+        # EOR (zero page)
+        0x45 => lambda {
+          @a ^= @memory.get(zero_page)
+          set_nz_flags(@a)
+        },
+
         # LSR (zero page)
         0x46 => lambda {
           address = zero_page
