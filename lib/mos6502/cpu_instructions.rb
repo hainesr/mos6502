@@ -51,6 +51,12 @@ module Mos6502
           @a = asl(@a) & 0xff
         },
 
+        # ORA (absolute)
+        0x0d => lambda {
+          @a |= @memory.get(absolute)
+          set_nz_flags(@a)
+        },
+
         # ASL (absolute)
         0x0e => lambda {
           address = absolute
