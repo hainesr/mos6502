@@ -28,6 +28,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   def test_zero_page
     # 0xb3 <OP> 0x80
     [
+      [0x05, 0xb3, true, false], # ORA
       [0x25, 0x80, true, false], # AND
       [0x45, 0x33, false, false] # EOR
     ].each do |opcode, result, negative, zero|

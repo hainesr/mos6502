@@ -23,6 +23,12 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # ORA (zero page)
+        0x05 => lambda {
+          @a |= @memory.get(zero_page)
+          set_nz_flags(@a)
+        },
+
         # ASL (zero page)
         0x06 => lambda {
           address = zero_page
