@@ -9,6 +9,7 @@ require 'mos6502'
 
 class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   def test_immediate
+    # 0x33 <OP> 0x55
     [
       [0x09, 0x77, false, false], # ORA
       [0x29, 0x11, false, false], # AND
@@ -25,6 +26,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_zero_page
+    # 0xb3 <OP> 0x80
     [
       [0x25, 0x80, true, false], # AND
       [0x45, 0x33, false, false] # EOR
@@ -42,6 +44,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_zero_page_x
+    # 0xb3 <OP> 0xb3
     [
       [0x35, 0xb3, true, false], # AND
       [0x55, 0x00, false, true]  # EOR
@@ -60,6 +63,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_absolute
+    # 0x33 <OP> 0xcc
     [
       [0x2d, 0x00, false, true], # AND
       [0x4d, 0xff, true, false]  # EOR
@@ -77,6 +81,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_absolute_x
+    # 0x33 <OP> 0xcc
     [
       [0x3d, 0x00, false, true], # AND
       [0x5d, 0xff, true, false]  # EOR
@@ -100,6 +105,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_absolute_y
+    # 0x33 <OP> 0xcd
     [
       [0x39, 0x01, false, false], # AND
       [0x59, 0xfe, true, false]   # EOR
@@ -123,6 +129,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_indexed_indirect
+    # 0xb3 <OP> 0x3f
     [
       [0x21, 0x33, false, false], # AND
       [0x41, 0x8c, true, false]   # EOR
@@ -141,6 +148,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   end
 
   def test_indirect_indexed
+    # 0x3f <OP> 0xa0
     [
       [0x31, 0x20, false, false], # AND
       [0x51, 0x9f, true, false]   # EOR
