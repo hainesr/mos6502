@@ -83,6 +83,12 @@ module Mos6502
           @pc = jump_to
         },
 
+        # AND (indexed indirect)
+        0x21 => lambda {
+          @a &= @memory.get(indexed_indirect)
+          set_nz_flags(@a)
+        },
+
         # BIT (zero page)
         0x24 => lambda {
           bit(@memory.get(zero_page))
