@@ -35,8 +35,8 @@ class Mos6502::Suites::Klaus2m5 < Mos6502::Suites::Runner
 
     unless output == :off
       puts message
-      puts "Memory at break point (PC: 0x#{last_pc.to_s(16)}):"
-      puts image[last_pc, 8].map { "0x#{_1.to_s(16)}" }.join(', ')
+      puts "Memory at break point (PC: #{format('0x%04x', last_pc)}):"
+      puts image[last_pc, 8].map { |b| format('0x%02x', b) }.join(', ')
     end
 
     # We know this won't work yet...
