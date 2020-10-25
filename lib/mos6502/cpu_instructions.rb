@@ -139,6 +139,12 @@ module Mos6502
           @pc = branch(offset) if @status.negative?
         },
 
+        # AND (zero page, X)
+        0x35 => lambda {
+          @a &= @memory.get(zero_page(@x))
+          set_nz_flags(@a)
+        },
+
         # ROL (zero page, X)
         0x36 => lambda {
           address = zero_page(@x)
