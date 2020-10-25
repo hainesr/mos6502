@@ -111,6 +111,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   def test_absolute_y
     # 0x33 <OP> 0xcd
     [
+      [0x19, 0xff, true, false],  # ORA
       [0x39, 0x01, false, false], # AND
       [0x59, 0xfe, true, false]   # EOR
     ].each do |opcode, result, negative, zero|

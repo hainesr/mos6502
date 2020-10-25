@@ -86,6 +86,12 @@ module Mos6502
           @status.carry = false
         },
 
+        # ORA (absolute, Y)
+        0x19 => lambda {
+          @a |= @memory.get(absolute(@y))
+          set_nz_flags(@a)
+        },
+
         # ORA (absolute, X)
         0x1d => lambda {
           @a |= @memory.get(absolute(@x))
