@@ -243,6 +243,12 @@ module Mos6502
           @pc = branch(offset) unless @status.overflow?
         },
 
+        # EOR (zero page, X)
+        0x55 => lambda {
+          @a ^= @memory.get(zero_page(@x))
+          set_nz_flags(@a)
+        },
+
         # LSR (zero page, X)
         0x56 => lambda {
           address = zero_page(@x)
