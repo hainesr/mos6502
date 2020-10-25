@@ -58,7 +58,8 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
 
   def test_absolute
     [
-      [0x2d, 0x00, false, true] # AND
+      [0x2d, 0x00, false, true], # AND
+      [0x4d, 0xff, true, false]  # EOR
     ].each do |opcode, result, negative, zero|
       cpu = Mos6502::Cpu.new
       cpu.load!([0xa9, 0x33, 0xa2, 0xcc, 0x8e, 0x41, 0x85, opcode, 0x41, 0x85])

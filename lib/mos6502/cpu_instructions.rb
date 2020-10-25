@@ -225,6 +225,12 @@ module Mos6502
           @pc = absolute
         },
 
+        # EOR (absolute)
+        0x4d => lambda {
+          @a ^= @memory.get(absolute)
+          set_nz_flags(@a)
+        },
+
         # LSR (absolute)
         0x4e => lambda {
           address = absolute
