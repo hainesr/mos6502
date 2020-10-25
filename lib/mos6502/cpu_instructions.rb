@@ -121,6 +121,12 @@ module Mos6502
           bit(@memory.get(absolute))
         },
 
+        # AND (absolute)
+        0x2d => lambda {
+          @a &= @memory.get(absolute)
+          set_nz_flags(@a)
+        },
+
         # ROL (absolute)
         0x2e => lambda {
           address = absolute
