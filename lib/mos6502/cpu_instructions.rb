@@ -145,6 +145,12 @@ module Mos6502
           @pc = branch(offset) if @status.negative?
         },
 
+        # AND (indirect indexed)
+        0x31 => lambda {
+          @a &= @memory.get(indirect_indexed)
+          set_nz_flags(@a)
+        },
+
         # AND (zero page, X)
         0x35 => lambda {
           @a &= @memory.get(zero_page(@x))
