@@ -75,6 +75,12 @@ module Mos6502
           @pc = branch(offset) unless @status.negative?
         },
 
+        # ORA (indirect indexed)
+        0x11 => lambda {
+          @a |= @memory.get(indirect_indexed)
+          set_nz_flags(@a)
+        },
+
         # ORA (zero page, X)
         0x15 => lambda {
           @a |= @memory.get(zero_page(@x))
