@@ -23,6 +23,12 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # ORA (indexed indirect)
+        0x01 => lambda {
+          @a |= @memory.get(indexed_indirect)
+          set_nz_flags(@a)
+        },
+
         # ORA (zero page)
         0x05 => lambda {
           @a |= @memory.get(zero_page)

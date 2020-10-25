@@ -136,6 +136,7 @@ class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
   def test_indexed_indirect
     # 0xb3 <OP> 0x3f
     [
+      [0x01, 0xbf, true, false],  # ORA
       [0x21, 0x33, false, false], # AND
       [0x41, 0x8c, true, false]   # EOR
     ].each do |opcode, result, negative, zero|
