@@ -7,7 +7,7 @@
 require 'test_helper'
 require 'mos6502'
 
-class Mos6502::CpuAccumulaterOperationsTest < Minitest::Test
+class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
   def test_immediate
     # 0x33 <OP> 0x55
     [
