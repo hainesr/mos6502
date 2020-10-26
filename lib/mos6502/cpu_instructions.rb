@@ -369,6 +369,11 @@ module Mos6502
           @pc = indirect
         },
 
+        # ADC (absolute)
+        0x6d => lambda {
+          adc(@memory.get(absolute))
+        },
+
         # ROR (absolute)
         0x6e => lambda {
           address = absolute
