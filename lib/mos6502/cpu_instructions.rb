@@ -337,6 +337,11 @@ module Mos6502
           @pc = (stack_pop | (stack_pop << 8)) + 1
         },
 
+        # ADC (indexed indirect)
+        0x61 => lambda {
+          adc(@memory.get(indexed_indirect))
+        },
+
         # ADC (zero page)
         0x65 => lambda {
           adc(@memory.get(zero_page))
