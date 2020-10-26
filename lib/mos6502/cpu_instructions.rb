@@ -386,6 +386,11 @@ module Mos6502
           @pc = branch(offset) if @status.overflow?
         },
 
+        # ADC (zero page, X)
+        0x75 => lambda {
+          adc(@memory.get(zero_page(@x)))
+        },
+
         # ROR (zero page, X)
         0x76 => lambda {
           address = zero_page(@x)
