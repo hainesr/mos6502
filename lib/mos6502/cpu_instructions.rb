@@ -758,6 +758,11 @@ module Mos6502
           compare(@x, next_byte)
         },
 
+        # SBC (indexed indirect)
+        0xe1 => lambda {
+          sbc(@memory.get(indexed_indirect))
+        },
+
         # CPX (zero page)
         0xe4 => lambda {
           compare(@x, @memory.get(zero_page))
