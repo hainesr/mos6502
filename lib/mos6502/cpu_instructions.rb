@@ -738,6 +738,11 @@ module Mos6502
           compare(@x, @memory.get(zero_page))
         },
 
+        # SBC (zero page)
+        0xe5 => lambda {
+          sbc(@memory.get(zero_page))
+        },
+
         # INC (zero page)
         0xe6 => lambda {
           address = zero_page
