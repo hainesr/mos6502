@@ -772,6 +772,11 @@ module Mos6502
           compare(@x, @memory.get(absolute))
         },
 
+        # SBC (absolute)
+        0xed => lambda {
+          sbc(@memory.get(absolute))
+        },
+
         # INC (absolute)
         0xee => lambda {
           address = absolute
