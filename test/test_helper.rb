@@ -8,3 +8,6 @@ require 'coveralls'
 Coveralls.wear!
 
 require 'minitest/autorun'
+
+Minitest::Test.parallelize_me!
+Minitest::Test.make_my_diffs_pretty!
