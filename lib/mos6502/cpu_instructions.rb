@@ -819,6 +819,11 @@ module Mos6502
           @pc = branch(offset) if @status.zero?
         },
 
+        # SBC (indirect indexed)
+        0xf1 => lambda {
+          sbc(@memory.get(indirect_indexed))
+        },
+
         # SBC (zero page, X)
         0xf5 => lambda {
           sbc(@memory.get(zero_page(@x)))
