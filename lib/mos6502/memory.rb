@@ -22,12 +22,16 @@ module Mos6502
       get(address) + (get(address + 1) << 8)
     end
 
-    def load!(image, start = 0)
-      @memory = []
+    def load(image, start = 0)
       return if image.nil?
 
       image = image.bytes if image.respond_to?(:bytes)
       @memory[start, image.length] = image
+    end
+
+    def load!(image, start = 0)
+      @memory = []
+      load(image, start)
     end
 
     def dump(start, length)

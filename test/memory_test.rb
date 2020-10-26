@@ -22,6 +22,29 @@ class Mos6502::MemoryTest < Minitest::Test
     bytes = [0xa9, 0xc0, 0xaa, 0xe8, 0x69, 0xc4, 0x00]
     string = "\xA9\xC0\xAA\xE8i\xC4\x00"
 
+    @memory.load(string)
+    assert_equal(bytes, @memory.dump(0x00, 7))
+
+    @memory.load(string, 0x400)
+    assert_equal(bytes, @memory.dump(0x400, 7))
+    assert_equal(bytes, @memory.dump(0x00, 7))
+
+    @memory.load(bytes, 0x100)
+    assert_equal(bytes, @memory.dump(0x100, 7))
+    assert_equal(bytes, @memory.dump(0x400, 7))
+
+    @memory.load('')
+    assert_equal(bytes, @memory.dump(0x100, 7))
+
+    # Check that neither of these fail, or raise anything.
+    @memory.load([])
+    @memory.load(nil)
+  end
+
+  def test_load!
+    bytes = [0xa9, 0xc0, 0xaa, 0xe8, 0x69, 0xc4, 0x00]
+    string = "\xA9\xC0\xAA\xE8i\xC4\x00"
+
     @memory.load!(string)
     assert_equal(bytes, @memory.dump(0x00, 7))
 
