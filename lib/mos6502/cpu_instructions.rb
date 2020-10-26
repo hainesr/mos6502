@@ -794,6 +794,11 @@ module Mos6502
           @pc = branch(offset) if @status.zero?
         },
 
+        # SBC (zero page, X)
+        0xf5 => lambda {
+          sbc(@memory.get(zero_page(@x)))
+        },
+
         # INC (zero page, X)
         0xf6 => lambda {
           address = zero_page(@x)
