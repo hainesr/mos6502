@@ -402,6 +402,11 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # ADC (absolute, Y)
+        0x79 => lambda {
+          adc(@memory.get(absolute(@y)))
+        },
+
         # ADC (absolute, X)
         0x7d => lambda {
           adc(@memory.get(absolute(@x)))
