@@ -391,6 +391,11 @@ module Mos6502
           @pc = branch(offset) if @status.overflow?
         },
 
+        # ADC (indirect indexed)
+        0x71 => lambda {
+          adc(@memory.get(indirect_indexed))
+        },
+
         # ADC (zero page, X)
         0x75 => lambda {
           adc(@memory.get(zero_page(@x)))
