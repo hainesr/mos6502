@@ -12,6 +12,7 @@ class Mos6502::Suites::Klaus2m5 < Mos6502::Suites::Runner
   IMAGE_PATH = File.expand_path(
     File.join('6502_65C02_functional_tests', 'bin_files', IMAGE_FILE), __dir__
   )
+  SUCCESS_PC = 0x3469
 
   def test_6502
     image = File.read(IMAGE_PATH).bytes
@@ -33,13 +34,14 @@ class Mos6502::Suites::Klaus2m5 < Mos6502::Suites::Runner
       break 'Reached a jump/break trap.' if last_pc == cpu.pc
     end
 
-    unless output == :off
-      puts message
-      puts "Memory at break point (PC: #{format('0x%04x', last_pc)}):"
-      puts image[last_pc, 8].map { |b| format('0x%02x', b) }.join(', ')
+    if last_pc == SUCCESS_PC
+      pass
+    else
+      flunk(
+        "#{message}\n" \
+        "Memory at break point (PC: #{format('0x%04x', last_pc)}):\n" +
+        image[last_pc, 8].map { |b| format('0x%02x', b) }.join(', ')
+      )
     end
-
-    # We know this won't work yet...
-    pass
   end
 end
