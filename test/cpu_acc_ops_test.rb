@@ -158,7 +158,7 @@ class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
   end
 
   def test_indexed_indirect
-    # 0xb3 <OP> 0x3f
+    # 0x3f <OP> 0xb3
     [
       [0x01, 0xbf, true, false, false, false],  # ORA
       [0x21, 0x33, false, false, false, false], # AND
