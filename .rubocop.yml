@@ -47,6 +47,11 @@ Metrics/ModuleLength:
   Exclude:
     - 'test/**/*.rb'
 
+# Ignore parameter list lengths in the tests.
+Metrics/ParameterLists:
+  Exclude:
+    - 'test/**/*.rb'
+
 # Set a slightly higher default for this.
 # Also ignore the CPU instructions file, which looks complex to this sort
 # of tool, but isn't really.
