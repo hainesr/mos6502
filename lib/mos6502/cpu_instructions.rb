@@ -337,6 +337,11 @@ module Mos6502
           @pc = (stack_pop | (stack_pop << 8)) + 1
         },
 
+        # ADC (zero page)
+        0x65 => lambda {
+          adc(@memory.get(zero_page))
+        },
+
         # ROR (zero page)
         0x66 => lambda {
           address = zero_page

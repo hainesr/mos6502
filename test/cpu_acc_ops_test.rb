@@ -28,10 +28,11 @@ class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
   def test_zero_page
     # 0xb3 <OP> 0x80
     [
-      [0x05, 0xb3, true, false], # ORA
-      [0x25, 0x80, true, false], # AND
-      [0x45, 0x33, false, false] # EOR
-    ].each do |opcode, result, negative, zero|
+      [0x05, 0xb3, true, false, false, false],  # ORA
+      [0x25, 0x80, true, false, false, false],  # AND
+      [0x45, 0x33, false, false, false, false], # EOR
+      [0x65, 0x33, false, false, true, true]    # ADC
+    ].each do |opcode, result, negative, zero, carry, overflow|
       cpu = Mos6502::Cpu.new
       cpu.load!([0xa9, 0xb3, 0xa2, 0x80, 0x86, 0x41, opcode, 0x41])
       cpu.step
@@ -41,6 +42,8 @@ class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
       assert_equal(result, cpu.a)
       assert_equal(negative, cpu.negative?)
       assert_equal(zero, cpu.zero?)
+      assert_equal(carry, cpu.carry?)
+      assert_equal(overflow, cpu.overflow?)
     end
   end
 
