@@ -43,11 +43,15 @@ module Mos6502
       end
     end
 
-    def load_image!(image = nil)
-      reset!
+    def load_image(image = nil, start = 0)
       return if image.nil?
 
-      @memory.load!(image)
+      @memory.load(image, start)
+    end
+
+    def load_image!(image = nil, start = 0)
+      reset!
+      load_image(image, start)
     end
 
     def dump_memory(start, length)

@@ -91,24 +91,27 @@ class Mos6502::CpuTest < Minitest::Test
     assert_equal([0x00] * 7, cpu.dump_memory(cpu.pc, 7))
   end
 
-  def test_load_image_empty_string_resets
+  def test_load_image_empty_string_resets_on_bang
     cpu = Mos6502::Cpu.new(code: @code_string)
+    cpu.load_image('')
     assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
 
     cpu.load_image!('')
     assert_equal([0x00] * 7, cpu.dump_memory(cpu.pc, 7))
   end
 
-  def test_load_image_empty_array_resets
+  def test_load_image_empty_array_resets_on_bang
     cpu = Mos6502::Cpu.new(code: @code_string)
+    cpu.load_image([])
     assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
 
     cpu.load_image!([])
     assert_equal([0x00] * 7, cpu.dump_memory(cpu.pc, 7))
   end
 
-  def test_load_image_nil_resets
+  def test_load_image_nil_resets_on_bang
     cpu = Mos6502::Cpu.new(code: @code_string)
+    cpu.load_image
     assert_equal(@code_bytes, cpu.dump_memory(cpu.pc, 7))
 
     cpu.load_image!
