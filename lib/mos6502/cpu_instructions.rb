@@ -820,6 +820,11 @@ module Mos6502
           @status.decimal_mode = true
         },
 
+        # SBC (absolute, Y)
+        0xf9 => lambda {
+          sbc(@memory.get(absolute(@y)))
+        },
+
         # SBC (absolute, X)
         0xfd => lambda {
           sbc(@memory.get(absolute(@x)))
