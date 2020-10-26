@@ -402,6 +402,11 @@ module Mos6502
           @status.interupt_disable = true
         },
 
+        # ADC (absolute, X)
+        0x7d => lambda {
+          adc(@memory.get(absolute(@x)))
+        },
+
         # ROR (absolute, X)
         0x7e => lambda {
           address = absolute(@x)

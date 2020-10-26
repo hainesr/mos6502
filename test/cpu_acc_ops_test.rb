@@ -102,10 +102,11 @@ class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
   def test_absolute_x
     # 0x33 <OP> 0xcc
     [
-      [0x1d, 0xff, true, false], # ORA
-      [0x3d, 0x00, false, true], # AND
-      [0x5d, 0xff, true, false]  # EOR
-    ].each do |opcode, result, negative, zero|
+      [0x1d, 0xff, true, false, false, false], # ORA
+      [0x3d, 0x00, false, true, false, false], # AND
+      [0x5d, 0xff, true, false, false, false], # EOR
+      [0x7d, 0xff, true, false, false, false]  # ADC
+    ].each do |opcode, result, negative, zero, carry, overflow|
       cpu = Mos6502::Cpu.new
       cpu.load!(
         [
@@ -121,6 +122,8 @@ class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
       assert_equal(result, cpu.a)
       assert_equal(negative, cpu.negative?)
       assert_equal(zero, cpu.zero?)
+      assert_equal(carry, cpu.carry?)
+      assert_equal(overflow, cpu.overflow?)
     end
   end
 
