@@ -815,6 +815,11 @@ module Mos6502
           @status.decimal_mode = true
         },
 
+        # SBC (absolute, X)
+        0xfd => lambda {
+          sbc(@memory.get(absolute(@x)))
+        },
+
         # INC (absolute, X)
         0xfe => lambda {
           address = absolute(@x)

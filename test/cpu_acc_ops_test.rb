@@ -105,7 +105,8 @@ class Mos6502::CpuAccumulatorOperationsTest < Minitest::Test
       [0x1d, 0xff, true, false, false, false], # ORA
       [0x3d, 0x00, false, true, false, false], # AND
       [0x5d, 0xff, true, false, false, false], # EOR
-      [0x7d, 0xff, true, false, false, false]  # ADC
+      [0x7d, 0xff, true, false, false, false], # ADC
+      [0xfd, 0x66, false, false, false, false] # SBC
     ].each do |opcode, result, negative, zero, carry, overflow|
       cpu = Mos6502::Cpu.new
       cpu.load!(
