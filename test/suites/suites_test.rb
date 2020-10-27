@@ -13,7 +13,7 @@ module Mos6502::Suites
   ENV_NAMESPACE = :mos6502
   TEST_SUITE_DIR = 'suites'
   TEST_SUITE_RUNNER = 'run.rb'
-  TEST_SUITES = [:klaus2m5].freeze
+  TEST_SUITES = [:klaus2m5, :nestest].freeze
 
   # Turn on individual test suites?
   def init_test_suites!

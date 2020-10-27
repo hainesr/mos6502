@@ -69,3 +69,7 @@ Style/ClassAndModuleChildren:
 # Just allow simple formatting rules. We're not doing anything complex.
 Style/FormatStringToken:
   EnforcedStyle: unannotated
+
+# Symbol arrays should look obviously like symbol arrays.
+Style/SymbolArray:
+  EnforcedStyle: brackets
