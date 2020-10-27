@@ -11,6 +11,7 @@ Metrics/AbcSize:
   Max: 25
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_illegal_instructions.rb'
     - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
@@ -24,22 +25,25 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_illegal_instructions.rb'
     - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Set a slightly higher default for this.
-# Also ignore the CPU instructions file, which looks complex to this sort
-# of tool, but isn't really.
+# Also ignore the CPU instructions files, which look complex to this sort
+# of tool, but aren't really.
 Metrics/CyclomaticComplexity:
   Max: 10
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_illegal_instructions.rb'
 
 # Ignore method length failures in the tests.
 # Also ignore in the CPU instructions files, which are unavoidably big.
 Metrics/MethodLength:
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_illegal_instructions.rb'
     - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
@@ -54,12 +58,13 @@ Metrics/ParameterLists:
     - 'test/**/*.rb'
 
 # Set a slightly higher default for this.
-# Also ignore the CPU instructions file, which looks complex to this sort
-# of tool, but isn't really.
+# Also ignore the CPU instructions files, which look complex to this sort
+# of tool, but aren't really.
 Metrics/PerceivedComplexity:
   Max: 10
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
+    - 'lib/mos6502/cpu_illegal_instructions.rb'
 
 # Allow compact child definitions in the tests for brevity.
 Style/ClassAndModuleChildren:

@@ -13,6 +13,10 @@ class TestCpu < Mos6502::Cpu
     @instructions.keys
   end
 
+  def illegal_instructions_list
+    illegal_instructions.keys
+  end
+
   def stack_ptr_dec
     stack_push(0x00)
   end
@@ -60,7 +64,7 @@ class Mos6502::CpuStackPointerTest < Minitest::Test
   end
 end
 
-# This test is really just to help make maintenance easier.
+# These tests are really just to help make maintenance easier.
 class Mos6502::CpuInstructionsOrderTest < Minitest::Test
   def test_cpu_instructions_order
     cpu = TestCpu.new
@@ -69,5 +73,25 @@ class Mos6502::CpuInstructionsOrderTest < Minitest::Test
       instructions.sort, instructions,
       'CPU instructions should be in ascending numerical order'
     )
+
+    illegal_instructions = cpu.illegal_instructions_list
+    assert_equal(
+      illegal_instructions.sort, illegal_instructions,
+      'Illegal CPU instructions should be in ascending numerical order'
+    )
+  end
+
+  def test_illegal_instructions_only_loaded_on_request
+    cpu = TestCpu.new
+    cpu.illegal_instructions_list.each do |inst|
+      refute_includes(cpu.instructions_list, inst)
+    end
+  end
+
+  def test_illegal_instructions_loaded_on_request
+    cpu = TestCpu.new(allow_illegal_ops: true)
+    cpu.illegal_instructions_list.each do |inst|
+      assert_includes(cpu.instructions_list, inst)
+    end
   end
 end
