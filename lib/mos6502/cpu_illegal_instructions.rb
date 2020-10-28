@@ -89,6 +89,12 @@ module Mos6502
           next_byte
         },
 
+        # LAX (indexed indirect)
+        0xa3 => lambda {
+          @a = @x = @memory.get(indexed_indirect)
+          set_nz_flags(@a)
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
