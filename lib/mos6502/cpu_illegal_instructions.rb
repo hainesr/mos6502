@@ -17,6 +17,11 @@ module Mos6502
           zero_page
         },
 
+        # NOP (absolute)
+        0x0c => lambda {
+          absolute
+        },
+
         # NOP (zero page)
         0x44 => lambda {
           zero_page

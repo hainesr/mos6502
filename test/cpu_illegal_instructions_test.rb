@@ -23,4 +23,14 @@ class Mos6502::CpuIllegalInstructionsTest < Minitest::Test
     assert_equal(0x00, @cpu.y)
     assert_equal(0x606, @cpu.pc)
   end
+
+  # NOP (absolute)
+  def test_0x0c
+    @cpu.load!([0x0c, 0xaa, 0xbb])
+    @cpu.step
+    assert_equal(0x00, @cpu.a)
+    assert_equal(0x00, @cpu.x)
+    assert_equal(0x00, @cpu.y)
+    assert_equal(0x603, @cpu.pc)
+  end
 end
