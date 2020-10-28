@@ -12,7 +12,6 @@ Metrics/AbcSize:
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
     - 'lib/mos6502/cpu_illegal_instructions.rb'
-    - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Ignore block length failures in the tests.
@@ -23,10 +22,10 @@ Metrics/BlockLength:
 # Ignore class length failures in the tests.
 # Also ignore in the CPU instructions files, which are unavoidably big.
 Metrics/ClassLength:
+  Max: 150
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
     - 'lib/mos6502/cpu_illegal_instructions.rb'
-    - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Set a slightly higher default for this.
@@ -41,10 +40,10 @@ Metrics/CyclomaticComplexity:
 # Ignore method length failures in the tests.
 # Also ignore in the CPU instructions files, which are unavoidably big.
 Metrics/MethodLength:
+  Max: 25
   Exclude:
     - 'lib/mos6502/cpu_instructions.rb'
     - 'lib/mos6502/cpu_illegal_instructions.rb'
-    - 'lib/mos6502/cpu_ops.rb'
     - 'test/**/*.rb'
 
 # Ignore module length failures in the tests.
