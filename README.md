@@ -5,6 +5,7 @@ A ruby implementation of the [MOS Technology 6502 microprocessor][wp-6502].
 ![Image of a MOS Technology 6502 microprocessor (from Wikipedia)](https://upload.wikimedia.org/wikipedia/commons/4/49/MOS_6502AD_4585_top.jpg)
 
 [![Gem Version](https://badge.fury.io/rb/mos6502.svg)](https://badge.fury.io/rb/mos6502)
+[![Build Status](https://travis-ci.com/hainesr/mos6502.svg?branch=main)](https://travis-ci.com/hainesr/mos6502)
 
 ## Installation
 
