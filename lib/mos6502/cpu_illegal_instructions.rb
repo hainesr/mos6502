@@ -99,6 +99,11 @@ module Mos6502
           @memory.set(zero_page, @a & @x)
         },
 
+        # SAX (absolute)
+        0x8f => lambda {
+          @memory.set(absolute, @a & @x)
+        },
+
         # LAX (indexed indirect)
         0xa3 => lambda {
           @a = @x = @memory.get(indexed_indirect)
