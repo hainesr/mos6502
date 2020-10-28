@@ -795,7 +795,7 @@ module Mos6502
         },
 
         # NOP
-        0xea => lambda {}, # rubocop:disable Style/Lambda
+        0xea => lambda {},
 
         # CPX (absolute)
         0xec => lambda {

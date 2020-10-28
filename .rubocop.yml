@@ -74,6 +74,10 @@ Style/ClassAndModuleChildren:
 Style/FormatStringToken:
   EnforcedStyle: unannotated
 
+# Always use `lambda` to define a lambda.
+Style/Lambda:
+  EnforcedStyle: lambda
+
 # Symbol arrays should look obviously like symbol arrays.
 Style/SymbolArray:
   EnforcedStyle: brackets
