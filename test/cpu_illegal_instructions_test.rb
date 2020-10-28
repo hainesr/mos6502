@@ -116,4 +116,12 @@ class Mos6502::CpuIllegalInstructionsTest < Minitest::Test
     assert_equal(0x42, @cpu.a)
     assert_equal(0x42, @cpu.x)
   end
+
+  # LAX (absolute)
+  def test_0xaf
+    @cpu.load!([0xaf, 0x02, 0x06])
+    @cpu.step
+    assert_equal(0x06, @cpu.a)
+    assert_equal(0x06, @cpu.x)
+  end
 end
