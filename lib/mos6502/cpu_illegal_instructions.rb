@@ -64,6 +64,11 @@ module Mos6502
         # NOP (implied)
         0x7a => lambda {},
 
+        # NOP (immediate)
+        0x80 => lambda {
+          next_byte
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
