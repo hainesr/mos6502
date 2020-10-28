@@ -204,4 +204,16 @@ class Mos6502::CpuIllegalInstructionsTest < Minitest::Test
     assert_equal(0xbf, @cpu.a)
     assert_equal(0xbf, @cpu.x)
   end
+
+  # SBC (immediate) + NOP
+  def test_0xeb
+    @cpu.load!([0xa9, 0x33, 0xeb, 0x55])
+    @cpu.step
+    @cpu.step
+    assert_equal(0xdd, @cpu.a)
+    assert(@cpu.negative?)
+    refute(@cpu.zero?)
+    refute(@cpu.carry?)
+    refute(@cpu.overflow?)
+  end
 end
