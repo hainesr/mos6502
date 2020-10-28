@@ -66,6 +66,26 @@ class Mos6502::CpuIllegalInstructionsTest < Minitest::Test
     assert_equal(0x606, @cpu.pc)
   end
 
+  # NOP (absolute, X)
+  def test_0x1c_0x3c_0x5c_0x7c_0xdc_0xfc
+    @cpu.load!(
+      [
+        0x1c, 0xa9, 0xa9, 0x3c, 0xa9, 0xa9, 0x5c, 0xa9, 0xa9,
+        0x7c, 0xa9, 0xa9, 0xdc, 0xa9, 0xa9, 0xfc, 0xa9, 0xa9
+      ]
+    )
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert_equal(0x00, @cpu.a)
+    assert_equal(0x00, @cpu.x)
+    assert_equal(0x00, @cpu.y)
+    assert_equal(0x612, @cpu.pc)
+  end
+
   # NOP (immediate)
   def test_0x80
     @cpu.load!([0x80, 0xff])
