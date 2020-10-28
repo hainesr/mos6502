@@ -119,6 +119,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # LAX (absolute, X)
+        0xbf => lambda {
+          @a = @x = @memory.get(absolute(@x))
+          set_nz_flags(@a)
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
