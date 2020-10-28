@@ -89,6 +89,11 @@ module Mos6502
           next_byte
         },
 
+        # SAX (indexed indirect)
+        0x83 => lambda {
+          @memory.set(indexed_indirect, @a & @x)
+        },
+
         # LAX (indexed indirect)
         0xa3 => lambda {
           @a = @x = @memory.get(indexed_indirect)

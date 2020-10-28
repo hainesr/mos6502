@@ -96,6 +96,24 @@ class Mos6502::CpuIllegalInstructionsTest < Minitest::Test
     assert_equal(0x602, @cpu.pc)
   end
 
+  # SAX (indexed indirect)
+  def test_0x83
+    @cpu.load!(
+      [
+        0xa9, 0x50, 0xa0, 0x05, 0x84, 0x20, 0x88, 0x84, 0x21,
+        0xa2, 0xe0, 0x83, 0x40
+      ]
+    )
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    @cpu.step
+    assert_equal([0x00, 0x40, 0x00], @cpu.dump_memory(0x404, 3))
+  end
+
   # LAX (indexed indirect)
   def test_0xa3
     @cpu.load!([0xa0, 0x06, 0x84, 0x21, 0xa2, 0x30, 0xa3, 0xf0])
