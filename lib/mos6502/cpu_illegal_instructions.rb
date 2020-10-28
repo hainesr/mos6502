@@ -22,14 +22,44 @@ module Mos6502
           absolute
         },
 
+        # NOP (zero page, X)
+        0x14 => lambda {
+          zero_page(@x)
+        },
+
+        # NOP (zero page, X)
+        0x34 => lambda {
+          zero_page(@x)
+        },
+
         # NOP (zero page)
         0x44 => lambda {
           zero_page
         },
 
+        # NOP (zero page, X)
+        0x54 => lambda {
+          zero_page(@x)
+        },
+
         # NOP (zero page)
         0x64 => lambda {
           zero_page
+        },
+
+        # NOP (zero page, X)
+        0x74 => lambda {
+          zero_page(@x)
+        },
+
+        # NOP (zero page, X)
+        0xd4 => lambda {
+          zero_page(@x)
+        },
+
+        # NOP (zero page, X)
+        0xf4 => lambda {
+          zero_page(@x)
         }
       }
     end
