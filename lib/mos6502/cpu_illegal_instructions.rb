@@ -27,10 +27,16 @@ module Mos6502
           zero_page(@x)
         },
 
+        # NOP (implied)
+        0x1a => lambda {},
+
         # NOP (zero page, X)
         0x34 => lambda {
           zero_page(@x)
         },
+
+        # NOP (implied)
+        0x3a => lambda {},
 
         # NOP (zero page)
         0x44 => lambda {
@@ -42,6 +48,9 @@ module Mos6502
           zero_page(@x)
         },
 
+        # NOP (implied)
+        0x5a => lambda {},
+
         # NOP (zero page)
         0x64 => lambda {
           zero_page
@@ -52,15 +61,24 @@ module Mos6502
           zero_page(@x)
         },
 
+        # NOP (implied)
+        0x7a => lambda {},
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
         },
 
+        # NOP (implied)
+        0xda => lambda {},
+
         # NOP (zero page, X)
         0xf4 => lambda {
           zero_page(@x)
-        }
+        },
+
+        # NOP (implied)
+        0xfa => lambda {}
       }
     end
   end
