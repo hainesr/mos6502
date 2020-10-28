@@ -107,6 +107,12 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # LAX (indirect indexed)
+        0xb3 => lambda {
+          @a = @x = @memory.get(indirect_indexed)
+          set_nz_flags(@a)
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
