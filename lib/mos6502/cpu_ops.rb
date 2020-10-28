@@ -113,32 +113,42 @@ module Mos6502
     end
 
     def sbc(value)
-      if @status.decimal_mode?
-        carry = @status.carry? ? 1 : 0
-        ones = 0x0f + (@a & 0x0f) - (value & 0x0f) + carry
-        tens = 0xf0 + (@a & 0xf0) - (value & 0xf0)
+      carry = @status.carry? ? 1 : 0
 
-        if ones < 0x10
-          ones -= 6
-        else
-          tens += 0x10
-          ones -= 0x10
-        end
+      result = if @status.decimal_mode?
+                 sbc_decimal(@a, value, carry)
+               else
+                 # We can use ADC with value EOR 0xff to subtract.
+                 adc_twos(@a, value ^ 0xff, carry)
+               end
 
-        if tens < 0x100
-          tens -= 0x60
-          @status.carry = false
-          @status.overflow = !((@a ^ value) & 0x80).zero? && (tens < 0x80)
-        else
-          @status.carry = true
-          @status.overflow = !((@a ^ value) & 0x80).zero? && (tens < 0x0180)
-        end
+      @a = result & 0xff
+      set_nz_flags(@a)
+    end
 
-        @a = (ones + tens) & 0xff
-        set_nz_flags(@a)
+    def sbc_decimal(acc, value, carry)
+      ones = 0x0f + (acc & 0x0f) - (value & 0x0f) + carry
+      tens = 0xf0 + (acc & 0xf0) - (value & 0xf0)
+
+      if ones < 0x10
+        ones -= 6
       else
-        adc(value ^ 0xff)
+        tens += 0x10
+        ones -= 0x10
       end
+
+      overflow = !((acc ^ value) & 0x80).zero?
+
+      if tens < 0x100
+        tens -= 0x60
+        @status.carry = false
+        @status.overflow = overflow && (tens < 0x80)
+      else
+        @status.carry = true
+        @status.overflow = overflow && (tens < 0x0180)
+      end
+
+      ones + tens
     end
   end
 end
