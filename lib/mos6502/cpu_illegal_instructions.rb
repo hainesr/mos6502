@@ -94,6 +94,11 @@ module Mos6502
           @memory.set(indexed_indirect, @a & @x)
         },
 
+        # SAX (zero page)
+        0x87 => lambda {
+          @memory.set(zero_page, @a & @x)
+        },
+
         # LAX (indexed indirect)
         0xa3 => lambda {
           @a = @x = @memory.get(indexed_indirect)
