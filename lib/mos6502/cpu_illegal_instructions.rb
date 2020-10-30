@@ -170,6 +170,11 @@ module Mos6502
           zero_page(@x)
         },
 
+        # DCP (DEC + CMP) (zero page, X)
+        0xd7 => lambda {
+          dcp(zero_page(@x))
+        },
+
         # NOP (implied)
         0xda => lambda {},
 
