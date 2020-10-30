@@ -178,6 +178,11 @@ module Mos6502
         # NOP (implied)
         0xda => lambda {},
 
+        # DCP (DEC + CMP) (absolute, Y)
+        0xdb => lambda {
+          dcp(absolute(@y))
+        },
+
         # NOP (absolute, X)
         0xdc => lambda {
           absolute(@x)
