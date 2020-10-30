@@ -11,6 +11,7 @@ class Mos6502::CpuIllegalAccumulatorOperationsTest < Minitest::Test
   def test_zero_page
     # 0xb3 <OP> 0x80
     [
+      [0x07, 0xb3, 0x00, true, false, true, false],  # SLO
       [0xc7, 0xb3, 0x7f, false, false, true, false], # DCP
       [0xe7, 0x31, 0x81, false, false, true, false]  # ISC
     ].each do |opcode, a, mem, negative, zero, carry, overflow|
