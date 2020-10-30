@@ -198,6 +198,11 @@ module Mos6502
           isc(indexed_indirect)
         },
 
+        # ISC (INC + SBC) (zero page)
+        0xe7 => lambda {
+          isc(zero_page)
+        },
+
         # SBC (immediate) + NOP
         0xeb => lambda {
           sbc(next_byte)
