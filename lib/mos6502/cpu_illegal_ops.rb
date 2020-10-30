@@ -21,5 +21,12 @@ module Mos6502
       @memory.set(address, value)
       sbc(value)
     end
+
+    def slo(address)
+      value = asl(@memory.get(address)) & 0xff
+      @memory.set(address, value)
+      @a |= value
+      set_nz_flags(@a)
+    end
   end
 end

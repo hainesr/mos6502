@@ -12,6 +12,11 @@ module Mos6502
 
     def illegal_instructions
       {
+        # SLO (ASL + ORA) (indexed indirect)
+        0x03 => lambda {
+          slo(indexed_indirect)
+        },
+
         # NOP (zero page)
         0x04 => lambda {
           zero_page
