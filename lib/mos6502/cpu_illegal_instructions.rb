@@ -188,6 +188,11 @@ module Mos6502
           absolute(@x)
         },
 
+        # DCP (DEC + CMP) (absolute, X)
+        0xdf => lambda {
+          dcp(absolute(@x))
+        },
+
         # SBC (immediate) + NOP
         0xeb => lambda {
           sbc(next_byte)
