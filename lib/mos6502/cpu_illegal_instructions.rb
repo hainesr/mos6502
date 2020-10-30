@@ -208,6 +208,11 @@ module Mos6502
           sbc(next_byte)
         },
 
+        # ISC (INC + SBC) (absolute)
+        0xef => lambda {
+          isc(absolute)
+        },
+
         # NOP (zero page, X)
         0xf4 => lambda {
           zero_page(@x)

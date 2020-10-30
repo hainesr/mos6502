@@ -53,7 +53,8 @@ class Mos6502::CpuIllegalAccumulatorOperationsTest < Minitest::Test
   def test_absolute
     # 0x33 <OP> 0xcc
     [
-      [0xcf, 0x33, 0xcb, false, false, false, false] # DCP
+      [0xcf, 0x33, 0xcb, false, false, false, false], # DCP
+      [0xef, 0x65, 0xcd, false, false, false, false]  # ISC
     ].each do |opcode, a, mem, negative, zero, carry, overflow|
       cpu = Mos6502::Cpu.new(allow_illegal_ops: true)
       cpu.load!([0xa9, 0x33, 0xa2, 0xcc, 0x8e, 0x41, 0x85, opcode, 0x41, 0x85])
