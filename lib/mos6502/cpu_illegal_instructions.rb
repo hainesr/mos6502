@@ -80,6 +80,11 @@ module Mos6502
           rla(zero_page)
         },
 
+        # RLA (ROL + AND) (absolute)
+        0x2f => lambda {
+          rla(absolute)
+        },
+
         # NOP (zero page, X)
         0x34 => lambda {
           zero_page(@x)
