@@ -4,7 +4,7 @@
 #
 # Licensed under the BSD License. See LICENCE for details.
 
-require_relative 'cpu_ops'
+require_relative 'cpu_illegal_ops'
 
 module Mos6502
   class Cpu
@@ -147,26 +147,17 @@ module Mos6502
 
         # DCP (DEC + CMP) (indexed indirect)
         0xc3 => lambda {
-          address = indexed_indirect
-          value = dec(@memory.get(address))
-          @memory.set(address, value)
-          compare(@a, value)
+          dcp(indexed_indirect)
         },
 
         # DCP (DEC + CMP) (zero page)
         0xc7 => lambda {
-          address = zero_page
-          value = dec(@memory.get(address))
-          @memory.set(address, value)
-          compare(@a, value)
+          dcp(zero_page)
         },
 
         # DCP (DEC + CMP) (absolute)
         0xcf => lambda {
-          address = absolute
-          value = dec(@memory.get(address))
-          @memory.set(address, value)
-          compare(@a, value)
+          dcp(absolute)
         },
 
         # NOP (zero page, X)
