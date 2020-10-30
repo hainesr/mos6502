@@ -154,6 +154,7 @@ class Mos6502::CpuIllegalAccumulatorOperationsTest < Minitest::Test
   def test_indirect_indexed
     # 0x3f <OP> 0xa0
     [
+      [0x13, 0x7f, 0x40, false, false, true, false], # SLO
       [0xd3, 0x3f, 0x9f, true, false, false, false], # DCP
       [0xf3, 0x9d, 0xa1, true, false, false, true]   # ISC
     ].each do |opcode, a, mem, negative, zero, carry, overflow|

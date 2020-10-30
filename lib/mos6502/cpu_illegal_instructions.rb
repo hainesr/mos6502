@@ -37,6 +37,11 @@ module Mos6502
           slo(absolute)
         },
 
+        # SLO (ASL + ORA) (indirect indexed)
+        0x13 => lambda {
+          slo(indirect_indexed)
+        },
+
         # NOP (zero page, X)
         0x14 => lambda {
           zero_page(@x)
