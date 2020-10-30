@@ -70,6 +70,11 @@ module Mos6502
           slo(absolute(@x))
         },
 
+        # RLA (ROL + AND) (indexed indirect)
+        0x23 => lambda {
+          rla(indexed_indirect)
+        },
+
         # NOP (zero page, X)
         0x34 => lambda {
           zero_page(@x)
