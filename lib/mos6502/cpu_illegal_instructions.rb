@@ -161,6 +161,14 @@ module Mos6502
           compare(@a, value)
         },
 
+        # DCP (DEC + CMP) (absolute)
+        0xcf => lambda {
+          address = absolute
+          value = dec(@memory.get(address))
+          @memory.set(address, value)
+          compare(@a, value)
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
