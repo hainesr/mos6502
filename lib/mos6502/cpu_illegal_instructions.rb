@@ -193,6 +193,11 @@ module Mos6502
           dcp(absolute(@x))
         },
 
+        # ISC (INC + SBC) (indexed indirect)
+        0xe3 => lambda {
+          isc(indexed_indirect)
+        },
+
         # SBC (immediate) + NOP
         0xeb => lambda {
           sbc(next_byte)

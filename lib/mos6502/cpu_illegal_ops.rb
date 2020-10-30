@@ -15,5 +15,11 @@ module Mos6502
       @memory.set(address, value)
       compare(@a, value)
     end
+
+    def isc(address)
+      value = inc(@memory.get(address))
+      @memory.set(address, value)
+      sbc(value)
+    end
   end
 end
