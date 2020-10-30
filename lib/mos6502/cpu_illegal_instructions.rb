@@ -55,6 +55,11 @@ module Mos6502
         # NOP (implied)
         0x1a => lambda {},
 
+        # SLO (ASL + ORA) (absolute, Y)
+        0x1b => lambda {
+          slo(absolute(@y))
+        },
+
         # NOP (absolute, X)
         0x1c => lambda {
           absolute(@x)
