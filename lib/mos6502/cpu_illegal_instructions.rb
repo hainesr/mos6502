@@ -213,6 +213,11 @@ module Mos6502
           isc(absolute)
         },
 
+        # ISC (INC + SBC) (indirect indexed)
+        0xf3 => lambda {
+          isc(indirect_indexed)
+        },
+
         # NOP (zero page, X)
         0xf4 => lambda {
           zero_page(@x)
