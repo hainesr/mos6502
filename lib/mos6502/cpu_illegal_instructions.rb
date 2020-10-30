@@ -223,6 +223,11 @@ module Mos6502
           zero_page(@x)
         },
 
+        # ISC (INC + SBC) (zero page, X)
+        0xf7 => lambda {
+          isc(zero_page(@x))
+        },
+
         # NOP (implied)
         0xfa => lambda {},
 
