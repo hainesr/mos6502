@@ -65,6 +65,11 @@ module Mos6502
           absolute(@x)
         },
 
+        # SLO (ASL + ORA) (absolute, X)
+        0x1f => lambda {
+          slo(absolute(@x))
+        },
+
         # NOP (zero page, X)
         0x34 => lambda {
           zero_page(@x)

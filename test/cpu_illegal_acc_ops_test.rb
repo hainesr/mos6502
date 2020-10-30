@@ -78,6 +78,7 @@ class Mos6502::CpuIllegalAccumulatorOperationsTest < Minitest::Test
   def test_absolute_x
     # 0x33 <OP> 0xcc
     [
+      [0x1f, 0xbb, 0x98, true, false, true, false],   # SLO
       [0xdf, 0x33, 0xcb, false, false, false, false], # DCP
       [0xff, 0x65, 0xcd, false, false, false, false]  # ISC
     ].each do |opcode, a, mem, negative, zero, carry, overflow|
