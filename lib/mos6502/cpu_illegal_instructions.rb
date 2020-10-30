@@ -145,6 +145,14 @@ module Mos6502
           set_nz_flags(@a)
         },
 
+        # DCP (DEC + CMP) (indexed indirect)
+        0xc3 => lambda {
+          address = indexed_indirect
+          value = dec(@memory.get(address))
+          @memory.set(address, value)
+          compare(@a, value)
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)
