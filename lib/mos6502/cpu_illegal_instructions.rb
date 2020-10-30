@@ -160,6 +160,11 @@ module Mos6502
           dcp(absolute)
         },
 
+        # DCP (DEC + CMP) (indirect indexed)
+        0xd3 => lambda {
+          dcp(indirect_indexed)
+        },
+
         # NOP (zero page, X)
         0xd4 => lambda {
           zero_page(@x)

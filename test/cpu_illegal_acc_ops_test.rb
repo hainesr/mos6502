@@ -68,4 +68,25 @@ class Mos6502::CpuIllegalAccumulatorOperationsTest < Minitest::Test
       assert_equal(overflow, cpu.overflow?)
     end
   end
+
+  def test_indirect_indexed
+    # 0x3f <OP> 0xa0
+    [
+      [0xd3, 0x3f, 0x9f, true, false, false, false] # DCP
+    ].each do |opcode, a, mem, negative, zero, carry, overflow|
+      cpu = Mos6502::Cpu.new(allow_illegal_ops: true)
+      cpu.load!([0xa2, 0x06, 0x86, 0x76, 0xa0, 0x04, 0xa9, 0x3f, opcode, 0x75])
+      cpu.step
+      cpu.step
+      cpu.step
+      cpu.step
+      cpu.step
+      assert_equal(a, cpu.a)
+      assert_equal([mem], cpu.dump_memory(0x0604, 1))
+      assert_equal(negative, cpu.negative?)
+      assert_equal(zero, cpu.zero?)
+      assert_equal(carry, cpu.carry?)
+      assert_equal(overflow, cpu.overflow?)
+    end
+  end
 end
