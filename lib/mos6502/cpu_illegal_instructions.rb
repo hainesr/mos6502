@@ -239,6 +239,11 @@ module Mos6502
         # NOP (absolute, X)
         0xfc => lambda {
           absolute(@x)
+        },
+
+        # ISC (INC + SBC) (absolute, X)
+        0xff => lambda {
+          isc(absolute(@x))
         }
       }
     end
