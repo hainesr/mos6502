@@ -156,6 +156,11 @@ module Mos6502
         # NOP (implied)
         0x5a => lambda {},
 
+        # SRE (LSR + EOR) (absolute, Y)
+        0x5b => lambda {
+          sre(absolute(@y))
+        },
+
         # NOP (absolute, X)
         0x5c => lambda {
           absolute(@x)
