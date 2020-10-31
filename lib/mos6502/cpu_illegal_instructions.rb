@@ -181,6 +181,11 @@ module Mos6502
           zero_page
         },
 
+        # RRA (ROR + ADC) (zero page)
+        0x67 => lambda {
+          rra(zero_page)
+        },
+
         # NOP (zero page, X)
         0x74 => lambda {
           zero_page(@x)
