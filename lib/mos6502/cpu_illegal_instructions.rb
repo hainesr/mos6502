@@ -118,6 +118,11 @@ module Mos6502
           rla(absolute(@x))
         },
 
+        # SRE (LSR + EOR) (indexed indirect)
+        0x43 => lambda {
+          sre(indexed_indirect)
+        },
+
         # NOP (zero page)
         0x44 => lambda {
           zero_page

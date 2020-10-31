@@ -35,5 +35,12 @@ module Mos6502
       @a |= value
       set_nz_flags(@a)
     end
+
+    def sre(address)
+      value = lsr(@memory.get(address))
+      @memory.set(address, value)
+      @a ^= value
+      set_nz_flags(@a)
+    end
   end
 end
