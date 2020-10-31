@@ -219,6 +219,11 @@ module Mos6502
           absolute(@x)
         },
 
+        # RRA (ROR + ADC) (absolute, X)
+        0x7f => lambda {
+          rra(absolute(@x))
+        },
+
         # NOP (immediate)
         0x80 => lambda {
           next_byte
