@@ -29,6 +29,12 @@ module Mos6502
       set_nz_flags(@a)
     end
 
+    def rra(address)
+      value = ror(@memory.get(address))
+      @memory.set(address, value)
+      adc(value)
+    end
+
     def slo(address)
       value = asl(@memory.get(address)) & 0xff
       @memory.set(address, value)
