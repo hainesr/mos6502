@@ -39,6 +39,7 @@ class Mos6502::CpuIllegalAccumulatorOperationsTest < Minitest::Test
       [0x17, 0xf7, 0x66, true, false, true, false],  # SLO
       [0x37, 0x22, 0x66, false, false, true, false], # RLA
       [0x57, 0xea, 0x59, true, false, true, false],  # SRE
+      [0x77, 0x0d, 0x59, false, false, true, false], # RRA
       [0xd7, 0xb3, 0xb2, false, false, true, false], # DCP
       [0xf7, 0xfe, 0xb4, true, false, false, false]  # ISC
     ].each do |opcode, a, mem, negative, zero, carry, overflow|
