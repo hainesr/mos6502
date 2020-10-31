@@ -166,6 +166,11 @@ module Mos6502
           absolute(@x)
         },
 
+        # SRE (LSR + EOR) (absolute, X)
+        0x5f => lambda {
+          sre(absolute(@x))
+        },
+
         # NOP (zero page)
         0x64 => lambda {
           zero_page
