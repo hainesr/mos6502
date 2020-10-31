@@ -209,6 +209,11 @@ module Mos6502
         # NOP (implied)
         0x7a => lambda {},
 
+        # RRA (ROR + ADC) (absolute, Y)
+        0x7b => lambda {
+          rra(absolute(@y))
+        },
+
         # NOP (absolute, X)
         0x7c => lambda {
           absolute(@x)
