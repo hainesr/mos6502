@@ -20,10 +20,10 @@ module Mos6502
     def_delegators :@status, :break?, :carry?, :decimal_mode?,
                    :interupt_disable?, :negative?, :overflow?, :zero?
 
-    def initialize(initial_pc: 0x600, code: nil, allow_illegal_ops: false)
+    def initialize(initial_pc: 0x600, allow_illegal_ops: false)
       @initial_pc = initial_pc
       @status = CpuFlags.new
-      load!(code)
+      reset!
       @instructions = instructions
       @instructions.merge!(illegal_instructions) if allow_illegal_ops
     end
