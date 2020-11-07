@@ -20,8 +20,11 @@ module Mos6502
     def_delegators :@status, :break?, :carry?, :decimal_mode?,
                    :interupt_disable?, :negative?, :overflow?, :zero?
 
-    def initialize(initial_pc: 0x600, allow_illegal_ops: false)
+    def initialize(
+      initial_pc: 0x600, disable_bcd: false, allow_illegal_ops: false
+    )
       @initial_pc = initial_pc
+      @disable_bcd = disable_bcd
       @status = CpuFlags.new
       reset!
       @instructions = instructions

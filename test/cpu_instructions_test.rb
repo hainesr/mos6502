@@ -477,6 +477,43 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.zero?)
   end
 
+  def test_0x69_bcd_disabled
+    cpu = Mos6502::Cpu.new(disable_bcd: true)
+    cpu.load!(
+      [0xf8, 0xa9, 0x90, 0x69, 0x09, 0x69, 0x99, 0x69, 0x01, 0x69, 0x01]
+    )
+    cpu.step
+    cpu.step
+    cpu.step
+    assert(cpu.decimal_mode?)
+    assert_equal(0x99, cpu.a)
+    refute(cpu.carry?)
+    assert(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
+
+    cpu.step
+    assert_equal(0x32, cpu.a)
+    assert(cpu.carry?)
+    refute(cpu.negative?)
+    assert(cpu.overflow?)
+    refute(cpu.zero?)
+
+    cpu.step
+    assert_equal(0x34, cpu.a)
+    refute(cpu.carry?)
+    refute(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
+
+    cpu.step
+    assert_equal(0x35, cpu.a)
+    refute(cpu.carry?)
+    refute(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
+  end
+
   def test_0x6a
     @cpu.load!([0xa9, 0x03, 0x38, 0x6a])
     @cpu.step
@@ -1449,6 +1486,43 @@ class Mos6502::CpuInstructionsTest < Minitest::Test
     refute(@cpu.negative?)
     refute(@cpu.overflow?)
     refute(@cpu.zero?)
+  end
+
+  def test_0xe9_bcd_disabled
+    cpu = Mos6502::Cpu.new(disable_bcd: true)
+    cpu.load!(
+      [0xf8, 0xa9, 0x90, 0xe9, 0x09, 0xe9, 0x99, 0xe9, 0x01, 0xe9, 0x01]
+    )
+    cpu.step
+    cpu.step
+    cpu.step
+    assert(cpu.decimal_mode?)
+    assert_equal(0x86, cpu.a)
+    assert(cpu.carry?)
+    assert(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
+
+    cpu.step
+    assert_equal(0xed, cpu.a)
+    refute(cpu.carry?)
+    assert(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
+
+    cpu.step
+    assert_equal(0xeb, cpu.a)
+    assert(cpu.carry?)
+    assert(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
+
+    cpu.step
+    assert_equal(0xea, cpu.a)
+    assert(cpu.carry?)
+    assert(cpu.negative?)
+    refute(cpu.overflow?)
+    refute(cpu.zero?)
   end
 
   def test_0xea

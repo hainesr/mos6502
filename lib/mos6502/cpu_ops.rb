@@ -11,7 +11,7 @@ module Mos6502
     def adc(value)
       carry = @status.carry? ? 1 : 0
 
-      result = if @status.decimal_mode?
+      result = if !@disable_bcd && @status.decimal_mode?
                  adc_decimal(@a, value, carry)
                else
                  adc_twos(@a, value, carry)
@@ -115,7 +115,7 @@ module Mos6502
     def sbc(value)
       carry = @status.carry? ? 1 : 0
 
-      result = if @status.decimal_mode?
+      result = if !@disable_bcd && @status.decimal_mode?
                  sbc_decimal(@a, value, carry)
                else
                  # We can use ADC with value EOR 0xff to subtract.

@@ -18,7 +18,7 @@ class Mos6502::Suites::NesTest < Mos6502::Suites::Runner
   def test_nes
     image = File.read(IMAGE_PATH).bytes
     cpu = Mos6502::Cpu.new(
-      initial_pc: NES_PRG_LOAD_LOC, allow_illegal_ops: true
+      initial_pc: NES_PRG_LOAD_LOC, disable_bcd: true, allow_illegal_ops: true
     )
     cpu.load_image!(
       image[NES_HEADER_SIZE...(NES_HEADER_SIZE + NES_PRG_BLOCK_SIZE)],
@@ -38,6 +38,9 @@ class Mos6502::Suites::NesTest < Mos6502::Suites::Runner
 
       # Run until we hit a jump/break trap.
       break 'Reached a jump/break trap.' if last_pc == cpu.pc
+
+      # Or until we hit what it seems is the end?
+      break if last_pc == SUCCESS_PC
     end
 
     if last_pc == SUCCESS_PC
