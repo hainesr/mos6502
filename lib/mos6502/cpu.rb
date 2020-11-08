@@ -79,13 +79,13 @@ module Mos6502
 
       # Decrement the stack pointer, and wrap it if it goes below 0.
       @sp -= 1
-      @sp = @sp &= 0xff if @sp < 0 # rubocop:disable Style/NumericPredicate
+      @sp &= 0xff if @sp < 0 # rubocop:disable Style/NumericPredicate
     end
 
     def stack_pop
       # Increment the stack pointer, and wrap it if it goes above 255.
       @sp += 1
-      @sp = @sp &= 0xff if @sp > 0xff
+      @sp &= 0xff if @sp > 0xff
 
       @memory.get((@sp & 0xff) + 0x0100)
     end
