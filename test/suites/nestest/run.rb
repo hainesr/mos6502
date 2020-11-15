@@ -44,7 +44,7 @@ class Mos6502::Suites::NesTest < Mos6502::Suites::Runner
     end
 
     if last_pc == SUCCESS_PC
-      pass
+      assert_equal([0x00, 0x00], cpu.dump_memory(2, 2))
     else
       code_loc = last_pc - (NES_PRG_LOAD_LOC - NES_HEADER_SIZE)
       flunk(
