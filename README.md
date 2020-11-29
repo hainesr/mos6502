@@ -5,7 +5,7 @@ A ruby implementation of the [MOS Technology 6502 microprocessor][wp-6502].
 ![Image of a MOS Technology 6502 microprocessor (from Wikipedia)](https://upload.wikimedia.org/wikipedia/commons/4/49/MOS_6502AD_4585_top.jpg)
 
 [![Gem Version](https://badge.fury.io/rb/mos6502.svg)](https://badge.fury.io/rb/mos6502)
-[![Build Status](https://travis-ci.com/hainesr/mos6502.svg?branch=main)](https://travis-ci.com/hainesr/mos6502)
+![CI](https://github.com/hainesr/mos6502/workflows/CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/hainesr/mos6502/badge.svg?branch=main)](https://coveralls.io/github/hainesr/mos6502?branch=main)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d3c28f3d1c4cee8099fb/maintainability)](https://codeclimate.com/github/hainesr/mos6502/maintainability)
 
