@@ -4,9 +4,7 @@
 #
 # Licensed under the BSD License. See LICENCE for details.
 
-require 'coveralls'
-Coveralls.wear!
-
+require 'simplecov'
 require 'minitest/autorun'
 
 Minitest::Test.parallelize_me!
