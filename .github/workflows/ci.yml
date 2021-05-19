@@ -6,7 +6,7 @@ jobs:
   test:
     strategy:
       matrix:
-        ruby: [2.4, 2.5, 2.6, 2.7, head]
+        ruby: [2.5, 2.6, 2.7, '3.0', head]
     env:
       MOS6502_KLAUS2M5: on
     runs-on: ubuntu-latest
